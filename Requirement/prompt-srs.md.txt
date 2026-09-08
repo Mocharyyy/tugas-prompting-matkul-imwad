@@ -1,0 +1,25 @@
+[Peran]
+Kamu adalah requirements analyst senior.
+
+[Tugas]
+Ubah DRAF PRD hasil Tahap 1 menjadi DRAF SRS ringkas.
+
+[Konteks]
+PRD hasil revisi : <tempelkan seluruh teks hasil output PRD Tahap 1 di sini>
+Acuan kualitas   : ISO/IEC 25010 (Functional Suitability, Performance Efficiency, Security, Usability)
+Prioritas        : MoSCoW
+Platform & stack : Website — Frontend Next.js, Backend Express.js, Database MySQL
+
+[Format output]
+1) Tujuan, scope, definisi istilah;
+2) User & stakeholder, lingkungan operasi, asumsi & dependensi;
+3) FR: tabel FR-01..FR-n — pola "Sistem harus dapat <aksi> <objek> saat <kondisi> → <output>" + ID, prioritas MoSCoW, metode verifikasi;
+4) NFR: tabel NFR-01..NFR-m — kategori ISO/IEC 25010 + metrik + target + kondisi ukur (wajib: akurasi & latensi Algoritma Fisher-Yates Shuffle, keamanan, privasi, usability);
+5) Kebutuhan data minimum fitur Algoritma (input → output model pengacakan);
+6) Aturan bisnis hasil riset;
+7) Matriks traceability: FR/NFR → fitur PRD terkait.
+
+[Aturan]
+- Setiap FR/NFR harus dapat ditelusuri ke bukti pada PRD/riset (termasuk referensi riset Alamsyah et al., 2021 & Arviansyah & Waluyo, 2020); dilarang menambah kebutuhan tanpa bukti.
+- Bila pembahasan mulai masuk arsitektur/UI, hentikan (itu urusan HLD/LLD).
+- Bahasa Indonesia baku, format Markdown.

@@ -1,0 +1,290 @@
+DRAF SRS Ringkas
+Sistem Informasi Ujian Online Tes Kemampuan Akademik (TKA) Berbasis Web Menggunakan Metode Algoritma Fisher-Yates Shuffle
+
+Status: Draf SRS
+Acuan kualitas: ISO/IEC 25010 — Functional Suitability, Performance Efficiency, Security, Usability
+Prioritas: MoSCoW
+Platform: Website
+Stack: Next.js, Express.js, MySQL
+
+Catatan: SRS ini diturunkan dari PRD Tahap 1 yang diberikan sebelumnya. Kebutuhan yang belum memiliki target numerik eksplisit pada PRD/riset tidak dibuat-buat; target tersebut ditandai [BELUM DITETAPKAN].
+
+1. Tujuan, Scope, dan Definisi Istilah
+1.1 Tujuan
+
+Sistem dikembangkan untuk mendukung pelaksanaan simulasi TKA secara online di Bimbel Ruang Belajar dengan tujuan:
+
+menyediakan proses pengerjaan ujian online bagi siswa;
+menghasilkan variasi urutan soal dan opsi jawaban menggunakan algoritma Fisher-Yates Shuffle;
+mengurangi keseragaman urutan ujian yang berpotensi meningkatkan peluang kecurangan;
+melakukan koreksi soal pilihan ganda secara otomatis;
+menampilkan skor evaluasi secara langsung; dan
+menyediakan rekapitulasi hasil evaluasi bagi pengelola bimbel.
+
+1.2 Scope
+In Scope
+Akses siswa ke ujian.
+Informasi/jadwal ujian.
+Instruksi ujian.
+Pengerjaan soal pilihan ganda.
+Pengacakan urutan soal ★.
+Pengacakan opsi jawaban ★.
+Pengumpulan jawaban.
+Koreksi otomatis.
+Tampilan skor.
+Pengelolaan bank soal oleh Tentor/Admin.
+Pengelolaan jadwal oleh Tentor/Admin.
+Rekapitulasi hasil evaluasi.
+Pemantauan hasil evaluasi oleh Pemilik Bimbel.
+
+Out of Scope
+Generative AI untuk membuat soal.
+Proctoring berbasis kamera.
+E-learning lengkap.
+Aplikasi mobile native.
+Integrasi sistem eksternal.
+Analisis pembelajaran tingkat lanjut.
+Sistem pembayaran atau administrasi bimbel secara menyeluruh.
+
+1.3 Definisi Istilah
+| Istilah                  | Definisi                                                                                                              |
+| ------------------------ | --------------------------------------------------------------------------------------------------------------------- |
+| **TKA**                  | Tes Kemampuan Akademik yang digunakan dalam konteks simulasi ujian pada Bimbel Ruang Belajar.                         |
+| **Siswa**                | Pengguna utama yang mengerjakan ujian online.                                                                         |
+| **Tentor/Admin**         | Pengelola bank soal dan jadwal ujian.                                                                                 |
+| **Pemilik Bimbel**       | Stakeholder yang memantau rekapitulasi evaluasi siswa.                                                                |
+| **Bank Soal**            | Kumpulan soal yang digunakan dalam pelaksanaan ujian.                                                                 |
+| **Fisher-Yates Shuffle** | Algoritma yang digunakan untuk mengacak urutan elemen, dalam produk ini diterapkan pada urutan soal dan opsi jawaban. |
+| **Rekapitulasi**         | Kumpulan hasil evaluasi/nilai siswa yang digunakan untuk pemantauan hasil belajar.                                    |
+| **Skor Evaluasi**        | Nilai yang dihasilkan setelah jawaban siswa dikoreksi.                                                                |
+
+2. User & Stakeholder, Lingkungan Operasi, Asumsi & Dependensi
+2.1 User dan Stakeholder
+| ID   | Aktor          | Kebutuhan Utama                                                                                              | Pengaruh      |
+| ---- | -------------- | ------------------------------------------------------------------------------------------------------------ | ------------- |
+| U-01 | Siswa          | Mengikuti ujian yang lancar, responsif, adil, memiliki variasi soal/jawaban, serta memperoleh skor langsung. | Tinggi        |
+| U-02 | Tentor/Admin   | Mengelola bank soal dan jadwal serta memperoleh hasil koreksi secara otomatis.                               | Tinggi        |
+| U-03 | Pemilik Bimbel | Memantau rekapitulasi hasil evaluasi siswa.                                                                  | Sedang–Tinggi |
+
+2.2 Lingkungan Operasi
+| Aspek          | Ketentuan                  |
+| -------------- | -------------------------- |
+| Platform       | Website                    |
+| Frontend       | Next.js                    |
+| Backend        | Express.js                 |
+| Database       | MySQL                      |
+| Pengguna utama | Siswa Bimbel Ruang Belajar |
+| Pengelola      | Tentor/Admin               |
+| Pemantau hasil | Pemilik Bimbel             |
+Detail arsitektur, komunikasi antar komponen, deployment, dan desain antarmuka tidak ditetapkan pada SRS ini karena merupakan ruang lingkup HLD/LLD.
+
+2.3 Asumsi
+| ID   | Asumsi                                                                                                                                               |
+| ---- | ---------------------------------------------------------------------------------------------------------------------------------------------------- |
+| A-01 | Siswa memiliki perangkat dan akses internet yang memadai untuk mengikuti ujian berbasis web.                                                         |
+| A-02 | Bank soal tersedia dan dapat dikelola oleh Tentor/Admin.                                                                                             |
+| A-03 | Soal yang menjadi scope utama adalah soal pilihan ganda karena kebutuhan pengacakan opsi jawaban dan koreksi otomatis didasarkan pada tipe tersebut. |
+| A-04 | Target KPI numerik yang belum tersedia dalam PRD tidak ditetapkan secara spekulatif dalam SRS.                                                       |
+
+2.4 Dependensi
+Ketersediaan bank soal dari Tentor/Admin.
+Ketersediaan jadwal ujian.
+Ketersediaan akses website bagi siswa.
+Data jawaban benar yang diperlukan untuk koreksi otomatis.
+
+3. Functional Requirements
+
+Metode verifikasi:
+
+UAT — User Acceptance Test.
+FT — Functional Test.
+IT — Integration Test.
+PT — Performance Test.
+ST — Security Test.
+UT — Usability Test.
+| ID          | Functional Requirement                                                                                                                                               | Prioritas | Verifikasi |
+| ----------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------- | ---------- |
+| **FR-01**   | Sistem harus dapat menyediakan akses kepada siswa untuk mengikuti ujian saat siswa memiliki ujian yang tersedia → sistem menyediakan akses ke ujian.                 | Must      | FT/UAT     |
+| **FR-02**   | Sistem harus dapat menampilkan informasi jadwal ujian saat siswa mengakses daftar ujian → informasi ujian tersedia bagi siswa.                                       | Must      | FT         |
+| **FR-03**   | Sistem harus dapat menampilkan instruksi ujian saat siswa akan memulai ujian → siswa memperoleh informasi sebelum pengerjaan.                                        | Must      | FT/UAT     |
+| **FR-04**   | Sistem harus dapat menampilkan soal pilihan ganda saat siswa mengerjakan ujian → soal dan opsi jawaban dapat dikerjakan.                                             | Must      | FT/UAT     |
+| **FR-05 ★** | Sistem harus dapat mengacak urutan soal menggunakan Fisher-Yates Shuffle saat sesi ujian dimulai → siswa memperoleh urutan soal yang bervariasi.                     | Must      | FT/PT      |
+| **FR-06 ★** | Sistem harus dapat mengacak urutan opsi jawaban menggunakan Fisher-Yates Shuffle saat soal pilihan ganda ditampilkan → siswa memperoleh variasi urutan opsi jawaban. | Must      | FT/PT      |
+| **FR-07**   | Sistem harus dapat menerima pilihan jawaban siswa saat siswa mengerjakan soal → jawaban siswa tercatat sebagai jawaban ujian.                                        | Must      | FT         |
+| **FR-08**   | Sistem harus dapat menerima pengumpulan jawaban saat siswa menyelesaikan ujian → status pengerjaan menjadi selesai dan jawaban tersedia untuk koreksi.               | Must      | FT/UAT     |
+| **FR-09**   | Sistem harus dapat mengoreksi jawaban pilihan ganda saat siswa mengumpulkan ujian → sistem menghasilkan hasil koreksi secara otomatis.                               | Must      | FT         |
+| **FR-10**   | Sistem harus dapat menghitung skor evaluasi saat proses koreksi selesai → skor evaluasi siswa dihasilkan.                                                            | Must      | FT         |
+| **FR-11**   | Sistem harus dapat menampilkan skor evaluasi saat siswa menyelesaikan ujian → siswa dapat melihat skor secara langsung.                                              | Must      | UAT        |
+| **FR-12**   | Sistem harus dapat menyediakan pengelolaan bank soal saat Tentor/Admin mengelola soal → data soal tersedia untuk kebutuhan ujian.                                    | Must      | FT/UAT     |
+| **FR-13**   | Sistem harus dapat menyediakan pengelolaan jadwal ujian saat Tentor/Admin mengatur pelaksanaan ujian → jadwal ujian tersedia untuk digunakan.                        | Must      | FT/UAT     |
+| **FR-14**   | Sistem harus dapat menyediakan rekapitulasi hasil evaluasi saat hasil ujian telah tersedia → data hasil evaluasi dapat direkapitulasi.                               | Must      | FT         |
+| **FR-15**   | Sistem harus dapat menyediakan hasil evaluasi untuk Pemilik Bimbel saat Pemilik Bimbel melakukan pemantauan → informasi rekap evaluasi tersedia.                     | Should    | UAT        |
+| **FR-16**   | Sistem harus dapat menyediakan detail hasil ujian saat hasil ujian telah tersedia → informasi hasil evaluasi dapat dilihat lebih terperinci.                         | Should    | FT/UAT     |
+| **FR-17**   | Sistem harus dapat menyediakan status pengerjaan ujian saat siswa sedang atau telah mengikuti ujian → status ujian dapat diketahui.                                  | Should    | FT         |
+| **FR-18**   | Sistem harus dapat menyediakan filter pada rekap hasil saat pengelola membutuhkan penyaringan data → data rekap dapat ditampilkan sesuai filter.                     | Could     | FT         |
+| **FR-19**   | Sistem harus dapat menyediakan riwayat hasil ujian saat siswa memiliki ujian yang telah diselesaikan → riwayat hasil dapat dilihat.                                  | Could     | FT         |
+| **FR-20**   | Sistem harus dapat menyediakan statistik sederhana hasil ujian saat data evaluasi tersedia → ringkasan statistik evaluasi dapat dilihat.                             | Could     | FT         |
+Catatan Requirement Algoritma
+
+FR-05 dan FR-06 merupakan requirement inti karena secara langsung menjawab problem PRD mengenai urutan soal yang seragam. Keduanya didukung oleh bukti riset bahwa Fisher-Yates Shuffle telah diterapkan pada sistem Computer-Based Test dan aplikasi persiapan TOEFL berbasis web:
+
+Alamsyah, A., Shofi, I. M., & Suseno, H. B. (2021), Prototipe Sistem Computer-Based Test dengan Pengacakan Soal Menggunakan Metode Fisher-Yates Shuffle.
+Arviansyah, Y., & Waluyo, R. (2020), Penerapan algoritma Fisher Yates Shuffle pada aplikasi TOEFL preparation berbasis web.
+
+4. Non-Functional Requirements
+4.1 Performance Efficiency
+| ID           | Kategori ISO/IEC 25010 | Metrik                               | Target                                                                  | Kondisi Ukur                                                                           | Verifikasi |
+| ------------ | ---------------------- | ------------------------------------ | ----------------------------------------------------------------------- | -------------------------------------------------------------------------------------- | ---------- |
+| **NFR-01**   | Performance Efficiency | Variasi urutan soal                  | **≥95%** sesi menghasilkan urutan soal berbeda                          | Pengujian beberapa sesi ujian pada kondisi bank soal yang sama                         | PT         |
+| **NFR-02 ★** | Performance Efficiency | Latensi proses Fisher-Yates Shuffle  | **[BELUM DITETAPKAN]**                                                  | Diukur dari saat proses pengacakan dimulai sampai urutan hasil tersedia pada prototype | PT         |
+| **NFR-03**   | Performance Efficiency | Waktu tersedianya rekap hasil        | **≤1 menit**                                                            | Diukur sejak ujian selesai sampai rekap hasil tersedia                                 | PT         |
+| **NFR-04**   | Performance Efficiency | Keberhasilan penyelesaian alur ujian | **≥95%** pengguna dapat menyelesaikan alur ujian tanpa kegagalan sistem | Pengujian alur ujian end-to-end                                                        | PT/UAT     |
+NFR-02 sengaja tidak diberi angka latensi. PRD memberikan tuntutan bahwa sistem harus lancar/responsif, tetapi tidak memberikan baseline atau batas waktu khusus untuk proses Fisher-Yates. Menetapkan angka seperti 100 ms atau 1 detik tanpa dasar akan melanggar aturan traceability.
+
+4.2 Functional Suitability — Akurasi Algoritma
+| ID           | Kategori               | Metrik                                                | Target                                          | Kondisi Ukur                                                                                             | Verifikasi |
+| ------------ | ---------------------- | ----------------------------------------------------- | ----------------------------------------------- | -------------------------------------------------------------------------------------------------------- | ---------- |
+| **NFR-05 ★** | Functional Suitability | Persentase sesi yang menghasilkan variasi urutan soal | **≥95%**                                        | Algoritma dijalankan pada beberapa sesi dengan kumpulan soal yang sama dan hasil dibandingkan antar sesi | FT/PT      |
+| **NFR-06 ★** | Functional Suitability | Variasi urutan opsi jawaban                           | **≥95%** sesi menghasilkan variasi susunan opsi | Algoritma diuji pada soal pilihan ganda dalam beberapa sesi                                              | FT/PT      |
+Target ≥95% berasal langsung dari KPI PRD Tahap 1. SRS tidak menambahkan klaim probabilistik lain mengenai distribusi Fisher-Yates karena tidak tersedia pada konteks yang diberikan.
+
+4.3 Security
+| ID         | Kategori ISO/IEC 25010 | Metrik                        | Target                                                                                   | Kondisi Ukur                                                              | Verifikasi |
+| ---------- | ---------------------- | ----------------------------- | ---------------------------------------------------------------------------------------- | ------------------------------------------------------------------------- | ---------- |
+| **NFR-07** | Security               | Perlindungan data hasil ujian | Data hasil evaluasi hanya tersedia kepada pihak yang memiliki kewenangan sesuai perannya | Pengujian akses menggunakan peran Siswa, Tentor/Admin, dan Pemilik Bimbel | ST         |
+| **NFR-08** | Security               | Pembatasan akses fungsi       | Fungsi pengelolaan bank soal dan jadwal tidak tersedia bagi Siswa                        | Pengujian akses berdasarkan peran                                         | ST/FT      |
+Detail mekanisme autentikasi, otorisasi, enkripsi, token, dan konfigurasi keamanan tidak ditentukan dalam SRS ini karena tidak terdapat dalam PRD dan termasuk pembahasan desain teknis.
+
+4.4 Privacy
+| ID         | Kategori ISO/IEC 25010 | Metrik                               | Target                                                                                      | Kondisi Ukur                                         | Verifikasi |
+| ---------- | ---------------------- | ------------------------------------ | ------------------------------------------------------------------------------------------- | ---------------------------------------------------- | ---------- |
+| **NFR-09** | Security — Privacy     | Pembatasan akses data evaluasi siswa | Data evaluasi tidak ditampilkan kepada pihak yang tidak memiliki kebutuhan/otoritas         | Pengujian akses data berdasarkan tiga peran pengguna | ST/UAT     |
+| **NFR-10** | Security — Privacy     | Paparan data siswa                   | Data siswa yang digunakan untuk evaluasi hanya ditampilkan sesuai kebutuhan fungsi evaluasi | Pengujian terhadap tampilan dan akses data hasil     | ST/UAT     |
+
+4.5 Usability
+| ID         | Kategori ISO/IEC 25010 | Metrik                                      | Target                                                     | Kondisi Ukur                                                                              | Verifikasi |
+| ---------- | ---------------------- | ------------------------------------------- | ---------------------------------------------------------- | ----------------------------------------------------------------------------------------- | ---------- |
+| **NFR-11** | Usability              | Keberhasilan menyelesaikan alur ujian       | **≥95%**                                                   | Pengguna menjalankan skenario akses → instruksi → pengerjaan → pengumpulan → melihat skor | UT/UAT     |
+| **NFR-12** | Usability              | Persepsi kelancaran dan responsivitas ujian | **[BELUM DITETAPKAN]**                                     | Evaluasi pengguna terhadap prototype                                                      | UT         |
+| **NFR-13** | Usability              | Ketersediaan skor setelah ujian             | **100%** ujian yang berhasil diselesaikan menampilkan skor | Pengujian seluruh skenario penyelesaian ujian                                             | UAT        |
+
+5. Kebutuhan Data Minimum Fitur Algoritma
+
+Bagian ini hanya mendefinisikan data yang diperlukan oleh fitur pengacakan, bukan desain struktur database atau implementasi algoritma.
+5.1 Pengacakan Urutan Soal
+
+Input:
+| Data           | Keterangan                                            |
+| -------------- | ----------------------------------------------------- |
+| Kumpulan soal  | Daftar soal yang akan digunakan dalam satu sesi ujian |
+| Identitas soal | Pembeda setiap soal dalam kumpulan                    |
+| Jumlah soal    | Jumlah elemen yang akan diacak                        |
+Proses yang dipersyaratkan:
+
+Kumpulan soal menjadi input Fisher-Yates Shuffle untuk menghasilkan variasi urutan soal.
+
+Output:
+| Data                         | Keterangan                                                   |
+| ---------------------------- | ------------------------------------------------------------ |
+| Urutan soal hasil pengacakan | Daftar soal dengan urutan yang telah diacak untuk sesi ujian |
+Representasi konseptual
+Input
+[Kumpulan Soal]
+       ↓
+Fisher-Yates Shuffle ★
+       ↓
+Output
+[Urutan Soal Teracak]
+5.2 Pengacakan Opsi Jawaban
+
+Input:
+| Data                  | Keterangan                                     |
+| --------------------- | ---------------------------------------------- |
+| Soal pilihan ganda    | Soal yang memiliki beberapa opsi jawaban       |
+| Kumpulan opsi jawaban | Opsi yang tersedia pada soal                   |
+| Identitas opsi        | Pembeda setiap opsi                            |
+| Jawaban benar         | Informasi yang diperlukan untuk proses koreksi |
+Output:
+| Data                 | Keterangan                                 |
+| -------------------- | ------------------------------------------ |
+| Opsi jawaban teracak | Opsi yang ditampilkan dalam urutan berbeda |
+Input
+[Opsi Jawaban]
+       ↓
+Fisher-Yates Shuffle ★
+       ↓
+Output
+[Opsi Jawaban Teracak]
+Catatan: SRS tidak menetapkan struktur tabel, tipe data database, format API, atau mekanisme penyimpanan karena hal tersebut merupakan bagian HLD/LLD.
+
+6. Aturan Bisnis Hasil Riset
+| ID        | Aturan Bisnis                                                                                                                      | Dasar                            |
+| --------- | ---------------------------------------------------------------------------------------------------------------------------------- | -------------------------------- |
+| **BR-01** | Sistem menggunakan Fisher-Yates Shuffle sebagai metode pengacakan urutan soal.                                                     | PRD + Alamsyah et al. (2021)     |
+| **BR-02** | Sistem menggunakan Fisher-Yates Shuffle untuk pengacakan opsi jawaban pilihan ganda.                                               | PRD + Arviansyah & Waluyo (2020) |
+| **BR-03** | Pengacakan ditujukan untuk menghasilkan variasi urutan ujian sehingga tidak semua siswa memperoleh urutan yang seragam.            | Problem statement PRD            |
+| **BR-04** | Variasi urutan soal menjadi indikator keberhasilan utama fitur pengacakan dengan target KPI ≥95% sesi menghasilkan urutan berbeda. | KPI PRD                          |
+| **BR-05** | Variasi urutan opsi jawaban menjadi bagian dari mekanisme pengacakan ujian.                                                        | Persona + fitur PRD              |
+| **BR-06** | Soal pilihan ganda dapat dikoreksi secara otomatis setelah siswa mengumpulkan ujian.                                               | Persona + scope PRD              |
+| **BR-07** | Skor evaluasi ditampilkan setelah proses koreksi selesai.                                                                          | Persona + KPI PRD                |
+| **BR-08** | Hasil ujian dikumpulkan dalam rekapitulasi evaluasi untuk mendukung pemantauan hasil belajar.                                      | Problem statement + scope PRD    |
+| **BR-09** | Tentor/Admin bertanggung jawab terhadap pengelolaan bank soal dan jadwal ujian.                                                    | Stakeholder PRD                  |
+| **BR-10** | Pemilik Bimbel menggunakan rekapitulasi hasil untuk pemantauan evaluasi siswa.                                                     | Stakeholder PRD                  |
+Interpretasi Bukti Riset
+
+Kedua penelitian yang menjadi acuan PRD mendukung penggunaan Fisher-Yates dalam konteks sistem ujian berbasis komputer/web. Oleh karena itu, SRS mempertahankan Fisher-Yates sebagai requirement fungsional, bukan menggantinya dengan metode pengacakan lain.
+
+Namun, penelitian tersebut tidak digunakan untuk menetapkan angka performa baru seperti batas latensi tertentu. Karena itu, target latensi algoritma pada NFR-02 tetap [BELUM DITETAPKAN] sampai diperoleh baseline pengujian prototype.
+
+7. Matriks Traceability
+
+Legenda:
+★ = requirement terkait langsung dengan fitur algoritma Fisher-Yates.
+| SRS ID       | Requirement Utama                      | Fitur PRD Terkait          | Bukti PRD/Riset                                   |
+| ------------ | -------------------------------------- | -------------------------- | ------------------------------------------------- |
+| FR-01        | Akses ujian siswa                      | Modul akses siswa          | Target user + Scope                               |
+| FR-02        | Jadwal ujian                           | Pengelolaan/jadwal ujian   | Stakeholder + Scope                               |
+| FR-03        | Instruksi ujian                        | Instruksi ujian            | Scope                                             |
+| FR-04        | Pengerjaan soal                        | Modul pengerjaan soal      | Persona + Scope                                   |
+| **FR-05 ★**  | Pengacakan urutan soal                 | Pengacakan nomor soal      | Problem + fitur algoritma; Alamsyah et al. (2021) |
+| **FR-06 ★**  | Pengacakan opsi jawaban                | Pengacakan opsi jawaban    | Fitur algoritma; Arviansyah & Waluyo (2020)       |
+| FR-07        | Pencatatan jawaban                     | Modul pengerjaan           | Scope                                             |
+| FR-08        | Pengumpulan ujian                      | Penyelesaian/pengumpulan   | Scope                                             |
+| FR-09        | Koreksi otomatis                       | Koreksi nilai instan       | Persona Tentor/Admin                              |
+| FR-10        | Perhitungan skor                       | Skor evaluasi              | Persona + Scope                                   |
+| FR-11        | Tampilan skor langsung                 | Skor evaluasi langsung     | Persona Siswa + KPI                               |
+| FR-12        | Pengelolaan bank soal                  | Bank soal                  | Stakeholder Tentor/Admin                          |
+| FR-13        | Pengelolaan jadwal                     | Jadwal ujian               | Stakeholder Tentor/Admin                          |
+| FR-14        | Rekapitulasi hasil                     | Rekap evaluasi             | Problem + Scope                                   |
+| FR-15        | Pemantauan Pemilik                     | Dashboard/pemantauan hasil | Stakeholder Pemilik                               |
+| FR-16        | Detail hasil                           | Detail hasil ujian         | Should Have PRD                                   |
+| FR-17        | Status pengerjaan                      | Status ujian               | Should Have PRD                                   |
+| FR-18        | Filter rekap                           | Filter rekap hasil         | Could Have PRD                                    |
+| FR-19        | Riwayat hasil                          | Riwayat hasil ujian        | Could Have PRD                                    |
+| FR-20        | Statistik hasil                        | Statistik sederhana        | Could Have PRD                                    |
+| **NFR-01**   | Variasi urutan ≥95%                    | KPI variasi urutan soal    | KPI PRD                                           |
+| **NFR-02 ★** | Latensi Fisher-Yates                   | Kebutuhan sistem responsif | Persona; target numerik **[BELUM DITETAPKAN]**    |
+| NFR-03       | Rekap ≤1 menit                         | Kecepatan rekapitulasi     | KPI PRD                                           |
+| NFR-04       | ≥95% alur berhasil                     | Kelancaran ujian           | KPI PRD                                           |
+| **NFR-05 ★** | Akurasi/keberhasilan variasi soal ≥95% | Pengacakan soal            | KPI PRD + Alamsyah et al. (2021)                  |
+| **NFR-06 ★** | Variasi opsi ≥95%                      | Pengacakan opsi jawaban    | Fitur algoritma + Arviansyah & Waluyo (2020)      |
+| NFR-07       | Perlindungan hasil ujian               | Pengelolaan hasil          | Stakeholder + kebutuhan peran                     |
+| NFR-08       | Pembatasan fungsi berdasarkan peran    | User & stakeholder         | PRD                                               |
+| NFR-09       | Privasi data evaluasi                  | Rekap hasil siswa          | Stakeholder + PRD                                 |
+| NFR-10       | Pembatasan paparan data                | Rekap evaluasi             | Stakeholder + PRD                                 |
+| NFR-11       | Keberhasilan alur ujian ≥95%           | Pengalaman ujian           | KPI PRD                                           |
+| NFR-12       | Responsivitas/usability                | Ujian lancar dan responsif | Persona Siswa                                     |
+| NFR-13       | Skor tersedia 100%                     | Tampilan skor langsung     | KPI PRD                                           |
+Ringkasan Requirement Prioritas
+
+Secara keseluruhan, Must Have yang menjadi inti prototype adalah:
+
+FR-04 — pengerjaan soal;
+FR-05 ★ — pengacakan urutan soal dengan Fisher-Yates;
+FR-06 ★ — pengacakan opsi jawaban dengan Fisher-Yates;
+FR-08 — pengumpulan ujian;
+FR-09 — koreksi otomatis;
+FR-10–FR-11 — perhitungan dan tampilan skor;
+FR-12–FR-14 — bank soal, jadwal, dan rekapitulasi.
+
+Dengan demikian, batas SRS tetap konsisten dengan PRD: fokus utama bukan membangun platform pendidikan yang luas, melainkan membuktikan bahwa sistem ujian online dapat mengatasi keseragaman urutan soal melalui Fisher-Yates sekaligus mempercepat evaluasi hasil belajar.

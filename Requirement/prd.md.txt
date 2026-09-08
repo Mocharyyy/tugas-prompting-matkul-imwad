@@ -1,0 +1,176 @@
+DRAF PRD Ringkas
+
+Sistem Informasi Ujian Online Tes Kemampuan Akademik (TKA) Berbasis Web Menggunakan Metode Algoritma Fisher-Yates Shuffle
+
+1. Ringkasan Eksekutif
+
+Sistem Informasi Ujian Online TKA ditujukan untuk meningkatkan pelaksanaan ujian simulasi TKA di Bimbel Ruang Belajar yang saat ini menghadapi dua permasalahan utama: urutan soal yang seragam antar siswa sehingga meningkatkan risiko kecurangan, serta proses rekapitulasi nilai yang masih dilakukan secara manual dan membutuhkan waktu.
+
+Produk akan menyediakan pengalaman ujian berbasis web bagi siswa, dengan dukungan pengelolaan bank soal dan jadwal oleh Tentor/Admin serta pemantauan hasil evaluasi oleh Pemilik Bimbel.
+
+Fitur pembeda utama adalah pengacakan urutan soal dan opsi jawaban menggunakan algoritma Fisher-Yates Shuffle (★). Algoritma ini digunakan untuk menghasilkan variasi urutan ujian antar siswa secara sistematis, sehingga bukan sekadar fitur kosmetik, tetapi menjadi bagian langsung dari solusi terhadap masalah keseragaman urutan soal.
+
+Platform yang digunakan adalah website dengan Next.js, Express.js, dan MySQL. Prototype dikembangkan dalam waktu satu semester secara mandiri dengan fokus pada modul ujian online dan rekapitulasi evaluasi hasil belajar.
+
+2. Problem Statement & Bukti
+2.1 Problem Statement
+
+Pelaksanaan ujian simulasi TKA di Bimbel Ruang Belajar masih menghasilkan urutan soal yang seragam antar siswa. Kondisi tersebut berpotensi meningkatkan peluang terjadinya kecurangan. Selain itu, proses rekapitulasi nilai evaluasi siswa masih dilakukan secara manual sehingga membutuhkan waktu dan berpotensi menambah beban kerja pengelola.
+
+| Jenis         | Pernyataan                                                                                                                                | Dasar             |
+| ------------- | ----------------------------------------------------------------------------------------------------------------------------------------- | ----------------- |
+| **FAKTA**     | Urutan soal pada ujian simulasi TKA masih seragam.                                                                                        | Problem statement |
+| **FAKTA**     | Keseragaman urutan soal berpotensi memicu tindakan kecurangan antar siswa.                                                                | Problem statement |
+| **FAKTA**     | Rekapitulasi nilai evaluasi siswa masih dilakukan secara manual.                                                                          | Problem statement |
+| **FAKTA**     | Siswa membutuhkan ujian online yang lancar, responsif, adil, dan menampilkan skor evaluasi secara langsung.                               | Persona           |
+| **FAKTA**     | Tentor membutuhkan pengacakan soal/jawaban dan koreksi nilai secara instan.                                                               | Persona           |
+| **FAKTA**     | Fisher-Yates Shuffle telah diterapkan pada sistem Computer-Based Test dan sistem persiapan TOEFL berbasis web dalam penelitian terdahulu. | Bukti riset       |
+| **ASUMSI-01** | Penggunaan variasi urutan soal dan opsi jawaban dapat membantu mengurangi peluang kecurangan selama ujian.                                | Asumsi produk     |
+| **ASUMSI-02** | Siswa memiliki perangkat dan akses internet yang memadai untuk mengikuti ujian berbasis web.                                              | [ASUMSI-02]       |
+| **ASUMSI-03** | Bank soal yang dikelola Tentor/Admin sudah tersedia atau dapat disiapkan selama prototype.                                                | [ASUMSI-03]       |
+| **ASUMSI-04** | Hasil ujian dapat langsung dihitung berdasarkan jawaban pilihan ganda yang tersedia.                                                      | [ASUMSI-04]       |
+
+Bukti Riset
+Alamsyah, Shofi, & Suseno (2021) — Prototipe Sistem Computer-Based Test dengan Pengacakan Soal Menggunakan Metode Fisher-Yates Shuffle, yang membuktikan penerapan Fisher-Yates Shuffle pada sistem Computer-Based Test.
+Arviansyah & Waluyo (2020) — Penerapan algoritma Fisher Yates Shuffle pada aplikasi TOEFL preparation berbasis web, yang menunjukkan penerapan pengacakan pada sistem ujian berbasis web.
+
+3. Target User & Stakeholder
+| Peran              | Kebutuhan                                                                                                                                           | Pengaruh                                                                                      |
+| ------------------ | --------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------- |
+| **Siswa**          | Mengikuti ujian online yang lancar, responsif, adil, soal dan opsi jawaban memiliki variasi urutan, serta memperoleh skor evaluasi secara langsung. | **Tinggi** — pengguna utama dan keberhasilan produk sangat bergantung pada pengalaman mereka. |
+| **Tentor/Admin**   | Mengelola bank soal, mengatur jadwal ujian, memperoleh pengacakan soal/jawaban, dan mendapatkan hasil koreksi secara instan.                        | **Tinggi** — pengelola operasional ujian dan data soal.                                       |
+| **Pemilik Bimbel** | Memantau rekapitulasi hasil evaluasi siswa.                                                                                                         | **Sedang–Tinggi** — menggunakan hasil sistem untuk pemantauan evaluasi pembelajaran.          |
+
+4. Value Proposition
+4.1 Pain yang Dikurangi
+
+Bagi Siswa
+
+Mengurangi masalah ujian dengan urutan soal yang sama.
+Mengurangi potensi ketidakadilan akibat keseragaman urutan soal.
+Mengurangi waktu menunggu hasil evaluasi.
+
+Bagi Tentor/Admin
+
+Mengurangi pekerjaan manual dalam pengacakan soal.
+Mengurangi pekerjaan manual dalam koreksi dan rekapitulasi nilai.
+Mempermudah pengelolaan pelaksanaan ujian.
+
+Bagi Pemilik Bimbel
+
+Mengurangi ketergantungan pada rekapitulasi manual.
+Mempermudah pemantauan hasil evaluasi siswa.
+4.2 Gain yang Diciptakan
+Siswa memperoleh ujian online yang lebih terstruktur dan bervariasi.
+Nilai evaluasi dapat diperoleh secara langsung setelah ujian.
+Tentor/Admin memperoleh proses pengelolaan ujian yang lebih efisien.
+Pemilik Bimbel memperoleh rekap hasil evaluasi yang lebih mudah dipantau.
+Proses evaluasi menjadi lebih cepat dibandingkan proses rekapitulasi manual.
+4.3 Mengapa Fisher-Yates Shuffle Bukan Gimmick?
+
+Fisher-Yates Shuffle memiliki hubungan langsung dengan problem utama produk, yaitu urutan soal dan jawaban yang seragam.
+
+Penggunaan algoritma ini memiliki fungsi produk yang jelas:
+
+Problem: semua siswa mendapatkan urutan yang seragam → Risiko: peluang kecurangan meningkat → Intervensi: menghasilkan variasi urutan soal dan opsi jawaban menggunakan Fisher-Yates Shuffle → Expected Outcome: pelaksanaan ujian menjadi lebih bervariasi dan adil.
+
+Dengan demikian, algoritma bukan sekadar fitur tambahan, tetapi merupakan mekanisme inti untuk menjawab salah satu masalah utama yang mendasari produk.
+
+5. Tujuan Produk & KPI
+| Tujuan                                    | KPI                                                                            |                            Target | Cara Mengukur                                                       |
+| ----------------------------------------- | ------------------------------------------------------------------------------ | --------------------------------: | ------------------------------------------------------------------- |
+| Mengurangi keseragaman urutan ujian       | Persentase sesi ujian yang menghasilkan urutan soal berbeda                    |                         **≥ 95%** | Membandingkan urutan soal antar sesi/siswa pada pengujian prototype |
+| Mengurangi keseragaman opsi jawaban       | Persentase sesi yang menghasilkan variasi urutan opsi                          |                         **≥ 95%** | Membandingkan susunan opsi jawaban pada data hasil pengacakan       |
+| Mempercepat koreksi                       | Persentase hasil ujian yang memperoleh skor secara otomatis                    | **100%** untuk soal pilihan ganda | Membandingkan jumlah ujian selesai dengan hasil skor otomatis       |
+| Mempercepat rekapitulasi                  | Waktu menghasilkan rekap nilai setelah ujian selesai                           |                     **≤ 1 menit** | Mengukur waktu dari ujian selesai sampai rekap tersedia             |
+| Mendukung pengalaman ujian yang responsif | Persentase pengguna yang dapat menyelesaikan alur ujian tanpa kegagalan sistem |                         **≥ 95%** | Pengujian skenario ujian end-to-end                                 |
+| Menyediakan hasil evaluasi langsung       | Persentase ujian selesai yang menampilkan skor                                 |                          **100%** | Menguji seluruh skenario penyelesaian ujian                         |
+
+Catatan: Target KPI di atas merupakan [ASUMSI-KPI-01] karena konteks belum memberikan baseline dan target numerik. Target dapat divalidasi kembali setelah prototype diuji.
+
+6. Scope Fitur 3 Bulan — MoSCoW
+| Prioritas       | Fitur                                | Deskripsi                                                               | Algoritma |
+| --------------- | ------------------------------------ | ----------------------------------------------------------------------- | :-------: |
+| **Must Have**   | Login/akses siswa                    | Siswa dapat mengakses sistem untuk mengikuti ujian.                     |           |
+| **Must Have**   | Daftar/jadwal ujian                  | Siswa dapat melihat ujian yang tersedia sesuai jadwal.                  |           |
+| **Must Have**   | Instruksi ujian                      | Menampilkan informasi/instruksi sebelum siswa memulai ujian.            |           |
+| **Must Have**   | Modul pengerjaan soal                | Siswa dapat melihat soal dan memilih jawaban.                           |           |
+| **Must Have**   | **Pengacakan urutan soal**           | Menghasilkan variasi urutan nomor soal untuk sesi ujian.                |   **★**   |
+| **Must Have**   | **Pengacakan opsi jawaban**          | Menghasilkan variasi urutan opsi jawaban pilihan ganda.                 |   **★**   |
+| **Must Have**   | Penyelesaian & pengumpulan ujian     | Siswa dapat mengakhiri dan mengumpulkan jawaban.                        |           |
+| **Must Have**   | Koreksi otomatis                     | Jawaban pilihan ganda dikoreksi dan menghasilkan nilai secara otomatis. |           |
+| **Must Have**   | Tampilan skor evaluasi               | Siswa dapat melihat hasil/skor setelah ujian.                           |           |
+| **Must Have**   | Pengelolaan bank soal                | Tentor/Admin dapat mengelola soal ujian.                                |           |
+| **Must Have**   | Pengelolaan jadwal                   | Tentor/Admin dapat mengelola jadwal ujian.                              |           |
+| **Must Have**   | Rekapitulasi hasil                   | Sistem menyediakan rekap hasil evaluasi siswa.                          |           |
+| **Should Have** | Detail hasil ujian                   | Menampilkan informasi hasil evaluasi secara lebih terperinci.           |           |
+| **Should Have** | Pemantauan hasil oleh Pemilik Bimbel | Pemilik dapat melihat rekap evaluasi.                                   |           |
+| **Should Have** | Status pengerjaan ujian              | Memberikan informasi status ujian siswa.                                |           |
+| **Could Have**  | Filter rekap hasil                   | Memudahkan penyaringan data hasil evaluasi.                             |           |
+| **Could Have**  | Riwayat hasil ujian siswa            | Menampilkan riwayat hasil ujian yang pernah dikerjakan.                 |           |
+| **Could Have**  | Statistik sederhana hasil ujian      | Menampilkan ringkasan statistik hasil evaluasi.                         |           |
+| **Won't Have**  | Fitur pembelajaran lengkap           | Sistem tidak dikembangkan menjadi platform e-learning lengkap.          |           |
+| **Won't Have**  | Generative AI pembuat soal           | Pembuatan soal menggunakan AI generatif tidak termasuk prototype.       |           |
+| **Won't Have**  | Proctoring berbasis kamera           | Pengawasan ujian menggunakan kamera tidak termasuk scope.               |           |
+| **Won't Have**  | Integrasi dengan sistem eksternal    | Integrasi dengan platform/sistem pihak ketiga tidak menjadi fokus.      |           |
+
+Fokus 3 Bulan
+
+Bulan 1 — Fondasi Produk
+
+Modul akses siswa.
+Bank soal.
+Jadwal ujian.
+Alur dasar pengerjaan ujian.
+
+Bulan 2 — Inti Ujian
+
+Pengacakan soal ★.
+Pengacakan opsi jawaban ★.
+Pengumpulan jawaban.
+Koreksi otomatis.
+Tampilan skor.
+
+Bulan 3 — Evaluasi
+
+Rekapitulasi hasil.
+Pemantauan hasil.
+Pengujian alur ujian.
+Penyempurnaan usability dan stabilitas prototype.
+
+Pembagian waktu merupakan [ASUMSI-ROADMAP-01] berdasarkan batasan prototype satu semester dan fokus fitur yang diberikan.
+
+7. Non-Goals Eksplisit
+Fitur berikut tidak menjadi tujuan produk dalam prototype ini:
+
+Sistem pembelajaran/e-learning lengkap di luar kebutuhan ujian TKA.
+Pembuatan soal otomatis menggunakan Generative AI.
+Sistem proctoring atau pengawasan ujian berbasis kamera.
+Integrasi dengan platform eksternal.
+Pengembangan aplikasi mobile native.
+Analisis pembelajaran tingkat lanjut atau rekomendasi pembelajaran personal.
+Sistem pembayaran atau manajemen administrasi bimbel secara menyeluruh.
+Pengembangan fitur ujian selain kebutuhan utama simulasi TKA.
+Pengembangan algoritma pengacakan selain penggunaan Fisher-Yates Shuffle sebagai metode yang ditetapkan dalam konteks.
+
+8. Asumsi & Risiko Utama + Mitigasi
+| Jenis      | Asumsi/Risiko                                                                 | Dampak | Mitigasi                                                                                                     |
+| ---------- | ----------------------------------------------------------------------------- | ------ | ------------------------------------------------------------------------------------------------------------ |
+| **Asumsi** | [ASUMSI-01] Variasi urutan soal dapat membantu mengurangi peluang kecurangan. | Sedang | Validasi melalui pengujian prototype dan evaluasi pengguna.                                                  |
+| **Asumsi** | [ASUMSI-02] Siswa memiliki perangkat dan koneksi internet yang memadai.       | Tinggi | Uji prototype pada kondisi perangkat dan koneksi yang realistis bagi target pengguna.                        |
+| **Asumsi** | [ASUMSI-03] Bank soal tersedia dan dapat dikelola Tentor/Admin.               | Tinggi | Menyediakan fungsi pengelolaan bank soal sebagai Must Have.                                                  |
+| **Risiko** | Gangguan koneksi saat siswa mengerjakan ujian.                                | Tinggi | [ASUMSI-MIT-01] Sediakan mekanisme penyimpanan progres/jawaban secara berkala.                               |
+| **Risiko** | Siswa mengalami kesulitan memahami alur ujian.                                | Sedang | Sediakan instruksi ujian yang jelas dan lakukan pengujian usability.                                         |
+| **Risiko** | Pengacakan tidak menghasilkan variasi sebagaimana yang diharapkan.            | Tinggi | Lakukan pengujian berulang terhadap hasil pengacakan dan verifikasi bahwa urutan yang dihasilkan bervariasi. |
+| **Risiko** | Data hasil ujian tidak tercatat dengan benar.                                 | Tinggi | Lakukan pengujian terhadap skenario pengerjaan, pengumpulan, koreksi, dan rekapitulasi.                      |
+| **Risiko** | Scope terlalu besar untuk pengerjaan mandiri.                                 | Tinggi | Memprioritaskan seluruh fitur **Must Have**, kemudian mengerjakan Should/Could jika waktu memungkinkan.      |
+| **Risiko** | Target KPI belum memiliki baseline aktual.                                    | Sedang | Menggunakan target awal sebagai [ASUMSI-KPI-01] dan melakukan pengukuran baseline saat pengujian prototype.  |
+
+
+Prinsip Prioritas Produk
+
+Jika terjadi keterbatasan waktu, prioritas pengembangan adalah:
+
+Modul Ujian → Fisher-Yates Shuffle ★ → Koreksi Otomatis → Skor Evaluasi → Rekapitulasi → Fitur pendukung.
+
+Dengan demikian, prototype tetap dapat membuktikan nilai utama produk, yaitu menyediakan ujian TKA online dengan variasi urutan soal/jawaban dan evaluasi hasil yang lebih cepat dibandingkan proses manual.
