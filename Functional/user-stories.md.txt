@@ -1,0 +1,233 @@
+DRAF USER STORIES
+Sistem Informasi Ujian Online TKA Berbasis Web
+
+Catatan keterlacakan: User stories di bawah diturunkan dari FR/NFR pada SRS Tahap 2. Tiga fungsionalitas tambahan yang secara eksplisit diminta dari riset Alamsyah et al. (2021)—indikator ragu-ragu, timer, dan reset login siswa—tidak seluruhnya tercantum sebagai FR eksplisit pada SRS sebelumnya. Agar tidak membuat keterlacakan palsu, ketiganya saya tandai sebagai kebutuhan tambahan dari riset dan tidak mengklaim berasal dari FR yang tidak memuatnya. Fitur pengacakan tanpa duplikasi dapat ditelusurkan langsung ke FR-05/FR-06.
+
+Epik 1 — Autentikasi & Pengelolaan Pengguna
+US-01 — Akses Ujian oleh Siswa
+ID Story: US-01
+User Story: "Sebagai Siswa, saya ingin mengakses ujian yang tersedia bagi saya, sehingga saya dapat mengikuti simulasi TKA secara online."
+Kriteria Penerimaan (Acceptance Criteria):
+Sistem menyediakan akses kepada siswa apabila terdapat ujian yang tersedia.
+Siswa dapat masuk ke alur ujian setelah memperoleh akses yang sesuai.
+Prioritas: Must Have
+Keterlacakan: FR-01
+US-02 — Pengelolaan Akses Siswa
+ID Story: US-02
+User Story: "Sebagai Administrator, saya ingin mengelola akses siswa terhadap sistem ujian, sehingga siswa dapat mengikuti ujian sesuai kebutuhan pelaksanaan."
+Kriteria Penerimaan (Acceptance Criteria):
+Administrator dapat mengelola akses pengguna siswa.
+Akses pengelolaan pengguna tidak tersedia bagi Siswa.
+Prioritas: Must Have
+Keterlacakan: FR-01, NFR-08
+US-03 — Reset Login Siswa
+ID Story: US-03
+User Story: "Sebagai Administrator, saya ingin mereset akses login siswa, sehingga siswa yang mengalami masalah akses dapat kembali menggunakan sistem ujian."
+Kriteria Penerimaan (Acceptance Criteria):
+Administrator dapat melakukan reset terhadap akses login siswa.
+Setelah reset, siswa dapat memperoleh kembali akses untuk menggunakan sistem sesuai ketentuan administrator.
+Prioritas: Should Have
+Keterlacakan: [KEBUTUHAN TAMBAHAN RISET — belum memiliki FR eksplisit pada SRS]
+
+Fitur reset login ini disebut dalam konteks riset Alamsyah et al. (2021), tetapi belum terdapat FR khusus pada SRS Tahap 2. Karena itu, untuk SRS final sebaiknya ditambahkan FR baru sebelum story ini masuk backlog implementasi.
+
+Epik 2 — Manajemen Bank Soal & Ujian
+US-04 — Pengelolaan Bank Soal
+ID Story: US-04
+User Story: "Sebagai Administrator, saya ingin mengelola bank soal, sehingga soal yang diperlukan untuk pelaksanaan ujian tersedia."
+Kriteria Penerimaan (Acceptance Criteria):
+Administrator dapat mengelola data soal yang digunakan untuk ujian.
+Soal yang tersedia dapat digunakan sebagai bagian dari ujian.
+Prioritas: Must Have
+Keterlacakan: FR-12
+US-05 — Pengelolaan Jadwal Ujian
+ID Story: US-05
+User Story: "Sebagai Administrator, saya ingin mengelola jadwal ujian, sehingga pelaksanaan ujian dapat tersedia bagi siswa sesuai jadwal."
+Kriteria Penerimaan (Acceptance Criteria):
+Administrator dapat mengelola jadwal ujian.
+Jadwal yang tersedia dapat ditampilkan kepada siswa.
+Prioritas: Must Have
+Keterlacakan: FR-02, FR-13
+US-06 — Melihat Jadwal Ujian
+ID Story: US-06
+User Story: "Sebagai Siswa, saya ingin melihat jadwal ujian yang tersedia, sehingga saya mengetahui ujian yang dapat saya ikuti."
+Kriteria Penerimaan (Acceptance Criteria):
+Sistem menampilkan informasi ujian yang tersedia bagi siswa.
+Informasi jadwal dapat digunakan siswa untuk mengetahui waktu pelaksanaan ujian.
+Prioritas: Must Have
+Keterlacakan: FR-02
+
+Epik 3 — Pelaksanaan Ujian & Pengacakan Soal
+US-07 — Melihat Instruksi Ujian
+ID Story: US-07
+User Story: "Sebagai Siswa, saya ingin melihat instruksi ujian sebelum mengerjakan soal, sehingga saya mengetahui informasi yang diperlukan sebelum memulai ujian."
+Kriteria Penerimaan (Acceptance Criteria):
+Sistem menampilkan instruksi sebelum siswa mulai mengerjakan.
+Siswa dapat melanjutkan ke pengerjaan setelah memperoleh informasi instruksi.
+Prioritas: Must Have
+Keterlacakan: FR-03
+US-08 — Mengerjakan Soal Pilihan Ganda
+ID Story: US-08
+User Story: "Sebagai Siswa, saya ingin mengerjakan soal pilihan ganda secara online, sehingga saya dapat menyelesaikan simulasi TKA melalui website."
+Kriteria Penerimaan (Acceptance Criteria):
+Sistem menampilkan soal dan opsi jawaban kepada siswa.
+Siswa dapat memilih jawaban untuk soal yang sedang dikerjakan.
+Prioritas: Must Have
+Keterlacakan: FR-04, FR-07
+US-09 — Pengacakan Urutan Soal ★
+ID Story: US-09
+User Story: "Sebagai Siswa, saya ingin mendapatkan urutan soal yang diacak, sehingga urutan soal yang saya kerjakan tidak seragam dengan siswa lainnya."
+Kriteria Penerimaan (Acceptance Criteria):
+Sistem mengacak kumpulan soal menggunakan Algoritma Fisher-Yates ketika sesi ujian dimulai.
+Hasil pengacakan tidak mengandung soal yang sama lebih dari satu kali dalam satu sesi.
+Kumpulan soal yang sama dapat menghasilkan variasi urutan pada sesi pengujian yang berbeda.
+Prioritas: Must Have
+Keterlacakan: FR-05, NFR-01, NFR-05
+
+Dasar riset: Alamsyah et al. (2021) menerapkan pengacakan soal menggunakan Fisher-Yates pada sistem Computer-Based Test. Persyaratan tanpa duplikasi merupakan karakteristik penting dalam pengacakan permutasi soal.
+
+US-10 — Pengacakan Opsi Jawaban ★
+ID Story: US-10
+User Story: "Sebagai Siswa, saya ingin mendapatkan urutan opsi jawaban yang diacak, sehingga susunan pilihan jawaban tidak seragam antar sesi ujian."
+Kriteria Penerimaan (Acceptance Criteria):
+Sistem mengacak opsi jawaban pilihan ganda menggunakan Fisher-Yates.
+Setiap opsi tetap tersedia setelah pengacakan.
+Jawaban benar tetap dapat digunakan untuk proses koreksi setelah opsi diacak.
+Prioritas: Must Have
+Keterlacakan: FR-06, NFR-06
+US-11 — Menandai Soal Ragu-Ragu
+ID Story: US-11
+User Story: "Sebagai Siswa, saya ingin menandai soal yang masih saya ragukan, sehingga saya dapat mengetahui soal yang perlu saya periksa kembali sebelum mengumpulkan ujian."
+Kriteria Penerimaan (Acceptance Criteria):
+Siswa dapat memberikan status ragu-ragu pada soal yang sedang dikerjakan.
+Status soal dapat dibedakan berdasarkan indikator hijau, kuning, dan merah sesuai status pengerjaan/ragu-ragu yang ditetapkan sistem.
+Prioritas: Should Have
+Keterlacakan: [KEBUTUHAN TAMBAHAN RISET — belum memiliki FR eksplisit pada SRS]
+
+Fitur indikator warna berasal dari fungsionalitas yang diminta berdasarkan Alamsyah et al. (2021), tetapi belum diturunkan menjadi FR pada SRS Tahap 2.
+
+US-12 — Melihat Sisa Waktu Ujian
+ID Story: US-12
+User Story: "Sebagai Siswa, saya ingin mengetahui sisa waktu pengerjaan ujian, sehingga saya dapat mengatur waktu pengerjaan sampai ujian selesai."
+Kriteria Penerimaan (Acceptance Criteria):
+Sistem menyediakan informasi mengenai sisa waktu pengerjaan selama ujian.
+Informasi waktu berubah sesuai berjalannya waktu sampai ujian selesai.
+Prioritas: Must Have
+Keterlacakan: [KEBUTUHAN TAMBAHAN RISET — belum memiliki FR eksplisit pada SRS]
+
+Timer merupakan fitur yang diminta berdasarkan riset, tetapi SRS sebelumnya hanya menyebut FR-17 (status pengerjaan) dan tidak memiliki FR khusus timer. Oleh karena itu, timer sebaiknya ditambahkan sebagai FR tersendiri pada revisi SRS.
+
+US-13 — Mengumpulkan Jawaban
+ID Story: US-13
+User Story: "Sebagai Siswa, saya ingin mengumpulkan jawaban setelah menyelesaikan ujian, sehingga jawaban saya dapat diproses untuk memperoleh hasil evaluasi."
+Kriteria Penerimaan (Acceptance Criteria):
+Sistem menerima pengumpulan jawaban siswa.
+Setelah pengumpulan berhasil, jawaban tersedia untuk proses koreksi.
+Prioritas: Must Have
+Keterlacakan: FR-08
+
+Epik 4 — Evaluasi & Hasil Ujian
+US-14 — Koreksi Jawaban Otomatis
+ID Story: US-14
+User Story: "Sebagai Siswa, saya ingin jawaban saya dikoreksi secara otomatis setelah ujian dikumpulkan, sehingga saya dapat memperoleh hasil evaluasi tanpa menunggu koreksi manual."
+Kriteria Penerimaan (Acceptance Criteria):
+Sistem melakukan koreksi terhadap jawaban pilihan ganda setelah pengumpulan.
+Sistem menghasilkan hasil koreksi secara otomatis.
+Prioritas: Must Have
+Keterlacakan: FR-09
+US-15 — Melihat Skor Evaluasi
+ID Story: US-15
+User Story: "Sebagai Siswa, saya ingin melihat skor evaluasi setelah menyelesaikan ujian, sehingga saya dapat mengetahui hasil ujian secara langsung."
+Kriteria Penerimaan (Acceptance Criteria):
+Sistem menghitung skor setelah proses koreksi selesai.
+Sistem menampilkan skor kepada siswa setelah ujian berhasil diselesaikan.
+Prioritas: Must Have
+Keterlacakan: FR-10, FR-11, NFR-13
+US-16 — Melihat Detail Hasil Ujian
+ID Story: US-16
+User Story: "Sebagai Siswa, saya ingin melihat detail hasil ujian, sehingga saya dapat mengetahui informasi evaluasi dari ujian yang telah saya kerjakan."
+Kriteria Penerimaan (Acceptance Criteria):
+Sistem menyediakan detail hasil setelah ujian selesai.
+Detail hasil dapat diakses setelah proses evaluasi tersedia.
+Prioritas: Should Have
+Keterlacakan: FR-16
+US-17 — Melihat Rekapitulasi Hasil
+ID Story: US-17
+User Story: "Sebagai Administrator, saya ingin melihat rekapitulasi hasil evaluasi siswa, sehingga proses pemantauan dan rekap nilai tidak perlu dilakukan secara manual."
+Kriteria Penerimaan (Acceptance Criteria):
+Sistem menyediakan rekapitulasi hasil ujian yang telah selesai.
+Hasil ujian yang telah dikoreksi dapat masuk dalam rekapitulasi.
+Prioritas: Must Have
+Keterlacakan: FR-14, NFR-03
+US-18 — Memantau Hasil Evaluasi
+ID Story: US-18
+User Story: "Sebagai Administrator, saya ingin menyediakan hasil evaluasi untuk pemantauan Pemilik Bimbel, sehingga hasil evaluasi siswa dapat digunakan untuk memantau proses pembelajaran."
+Kriteria Penerimaan (Acceptance Criteria):
+Sistem menyediakan data rekap hasil evaluasi.
+Pemilik Bimbel dapat memperoleh informasi hasil evaluasi sesuai kewenangannya.
+Prioritas: Should Have
+Keterlacakan: FR-15, NFR-07, NFR-09
+
+Epik 5 — Keamanan & Pengalaman Pengguna
+US-19 — Pembatasan Akses Berdasarkan Peran
+ID Story: US-19
+User Story: "Sebagai Administrator, saya ingin fungsi pengelolaan dibatasi berdasarkan peran pengguna, sehingga data dan fungsi ujian tidak dapat diakses oleh pengguna yang tidak berwenang."
+Kriteria Penerimaan (Acceptance Criteria):
+Fungsi pengelolaan bank soal dan jadwal hanya dapat digunakan oleh pihak yang berwenang.
+Siswa tidak dapat menggunakan fungsi pengelolaan bank soal dan jadwal.
+Prioritas: Must Have
+Keterlacakan: NFR-07, NFR-08
+US-20 — Perlindungan Data Evaluasi
+ID Story: US-20
+User Story: "Sebagai Administrator, saya ingin data hasil evaluasi siswa hanya dapat diakses oleh pihak yang berwenang, sehingga privasi data evaluasi siswa tetap terjaga."
+Kriteria Penerimaan (Acceptance Criteria):
+Data hasil evaluasi tidak dapat diakses oleh pengguna yang tidak memiliki kewenangan.
+Akses data evaluasi diuji berdasarkan peran Siswa, Administrator, dan Pemilik Bimbel.
+Prioritas: Must Have
+Keterlacakan: NFR-07, NFR-09, NFR-10
+US-21 — Kelancaran Alur Ujian
+ID Story: US-21
+User Story: "Sebagai Siswa, saya ingin menyelesaikan alur ujian dengan lancar dan responsif, sehingga saya dapat mengikuti ujian tanpa hambatan sistem."
+Kriteria Penerimaan (Acceptance Criteria):
+Siswa dapat menyelesaikan alur akses ujian, pengerjaan, pengumpulan, dan melihat skor.
+Keberhasilan penyelesaian alur ujian mencapai target minimal yang ditetapkan SRS.
+Prioritas: Must Have
+Keterlacakan: NFR-04, NFR-11, NFR-12
+
+Ringkasan Backlog Must Have & Should Have
+| ID          | Epik        | Fokus                            | Prioritas     |
+| ----------- | ----------- | -------------------------------- | ------------- |
+| US-01       | Autentikasi | Akses ujian                      | Must Have     |
+| US-02       | Autentikasi | Pengelolaan akses                | Must Have     |
+| US-03       | Autentikasi | Reset login                      | Should Have*  |
+| US-04       | Bank Soal   | Bank soal                        | Must Have     |
+| US-05       | Bank Soal   | Jadwal ujian                     | Must Have     |
+| US-06       | Bank Soal   | Melihat jadwal                   | Must Have     |
+| US-07       | Pelaksanaan | Instruksi                        | Must Have     |
+| US-08       | Pelaksanaan | Pengerjaan soal                  | Must Have     |
+| **US-09 ★** | Pelaksanaan | **Shuffle soal tanpa duplikasi** | **Must Have** |
+| **US-10 ★** | Pelaksanaan | **Shuffle opsi jawaban**         | **Must Have** |
+| US-11       | Pelaksanaan | Ragu-ragu                        | Should Have*  |
+| US-12       | Pelaksanaan | Timer                            | Must Have*    |
+| US-13       | Pelaksanaan | Pengumpulan                      | Must Have     |
+| US-14       | Evaluasi    | Koreksi otomatis                 | Must Have     |
+| US-15       | Evaluasi    | Skor langsung                    | Must Have     |
+| US-16       | Evaluasi    | Detail hasil                     | Should Have   |
+| US-17       | Evaluasi    | Rekap hasil                      | Must Have     |
+| US-18       | Evaluasi    | Pemantauan hasil                 | Should Have   |
+| US-19       | Keamanan    | Hak akses                        | Must Have     |
+| US-20       | Keamanan    | Privasi hasil                    | Must Have     |
+| US-21       | Usability   | Alur ujian                       | Must Have     |
+* Belum memiliki FR eksplisit pada SRS Tahap 2 dan perlu ditambahkan pada revisi SRS agar traceability menjadi penuh.
+
+Catatan Penting untuk Tahap Berikutnya
+
+Ada ketidaksesuaian kecil antara SRS Tahap 2 dan instruksi User Stories: riset Alamsyah et al. (2021) diminta menjadi sumber fitur timer, indikator ragu-ragu, dan reset login, tetapi fitur-fitur tersebut belum menjadi FR eksplisit di SRS sebelumnya.
+
+Untuk menjaga prinsip requirements traceability, revisi SRS berikutnya sebaiknya menambahkan:
+
+FR-21: timer/sisa waktu ujian;
+FR-22: penanda status/ragu-ragu soal;
+FR-23: reset akses/login siswa oleh Administrator.
+
+Dengan begitu, US-03, US-11, dan US-12 tidak lagi memiliki traceability "tambahan riset", tetapi dapat ditelusuri secara formal dari SRS → User Story → Acceptance Criteria → Test Case.

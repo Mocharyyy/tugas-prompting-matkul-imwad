@@ -1,0 +1,203 @@
+Use Case Detail — Mengerjakan Ujian dengan Pengacakan Soal Fisher-Yates Shuffle
+
+1. Use Case Detail
+ID Use Case & Nama Use Case
+
+UC-01 — Mengerjakan Ujian dengan Pengacakan Soal Fisher-Yates Shuffle
+
+Aktor Utama
+
+Siswa
+
+Aktor Pendukung
+Administrator/Tentor — menyediakan bank soal dan jadwal ujian.
+Sistem CBT — menyediakan soal, melakukan pengacakan, mencatat jawaban, status soal, dan waktu ujian.
+
+Deskripsi Singkat
+
+Use case ini menggambarkan proses siswa mengikuti ujian CBT secara online, mulai dari mengakses ujian yang tersedia, memperoleh soal yang telah diacak menggunakan Algoritma Fisher-Yates Shuffle, mengerjakan dan menandai soal, memantau sisa waktu, hingga mengumpulkan jawaban untuk diproses menjadi hasil evaluasi.
+
+Pengacakan dilakukan terhadap urutan soal sehingga dalam satu sesi ujian tidak boleh terdapat nomor soal yang muncul lebih dari satu kali.
+
+Pre-kondisi
+Siswa memiliki akses untuk mengikuti ujian.
+Ujian telah tersedia sesuai jadwal.
+Bank soal untuk ujian telah tersedia.
+Ujian memiliki kumpulan soal pilihan ganda.
+Siswa belum menyelesaikan ujian tersebut.
+Sesi ujian dapat dimulai oleh sistem.
+Post-kondisi
+
+Jika berhasil:
+
+Siswa menyelesaikan dan mengumpulkan ujian.
+Jawaban siswa tercatat.
+Urutan soal yang digunakan pada sesi tersebut telah diacak.
+Tidak terdapat duplikasi nomor soal dalam sesi.
+Jawaban dapat diproses untuk koreksi otomatis dan menghasilkan skor.
+
+Jika gagal:
+
+Sistem mempertahankan status sesi sesuai kondisi terakhir yang berhasil dicatat atau mengakhiri sesi apabila waktu ujian telah habis, sesuai aturan sistem.
+
+Skenario Utama — Happy Flow
+| No. | Aktor/Sistem | Langkah                                                                                       |
+| --: | ------------ | --------------------------------------------------------------------------------------------- |
+|   1 | Siswa        | Mengakses ujian yang tersedia sesuai jadwal.                                                  |
+|   2 | Sistem       | Memvalidasi bahwa siswa memiliki akses dan ujian dapat dimulai.                               |
+|   3 | Sistem       | Menampilkan instruksi ujian.                                                                  |
+|   4 | Siswa        | Memulai ujian.                                                                                |
+|   5 | Sistem       | Mengambil kumpulan soal yang telah ditentukan untuk ujian.                                    |
+|   6 | Sistem       | Menjalankan Fisher-Yates Shuffle terhadap kumpulan soal.                                      |
+|   7 | Sistem       | Menghasilkan urutan soal teracak dalam waktu **< 2 detik**.                                   |
+|   8 | Sistem       | Memastikan setiap nomor soal muncul tepat satu kali dalam sesi.                               |
+|   9 | Sistem       | Menampilkan soal pertama dan menyediakan informasi sisa waktu.                                |
+|  10 | Siswa        | Membaca soal dan memilih jawaban.                                                             |
+|  11 | Sistem       | Mencatat jawaban dan memperbarui status soal menjadi **hijau (Terjawab)**.                    |
+|  12 | Siswa        | Jika belum yakin, menandai soal sebagai **ragu-ragu**.                                        |
+|  13 | Sistem       | Memperbarui status soal menjadi **kuning (Ragu-ragu)**.                                       |
+|  14 | Siswa        | Berpindah ke soal lain atau kembali ke soal sebelumnya.                                       |
+|  15 | Sistem       | Mempertahankan urutan soal hasil pengacakan selama sesi berlangsung.                          |
+|  16 | Siswa        | Meninjau soal yang belum dijawab atau masih diragukan.                                        |
+|  17 | Sistem       | Menampilkan status navigasi: **hijau = terjawab, kuning = ragu-ragu, merah = belum dijawab**. |
+|  18 | Siswa        | Mengumpulkan ujian setelah selesai.                                                           |
+|  19 | Sistem       | Menyimpan jawaban dan mengakhiri sesi ujian.                                                  |
+|  20 | Sistem       | Mengirim hasil jawaban untuk proses koreksi otomatis.                                         |
+
+Skenario Alternatif / Pengecualian
+ALT-01 — Siswa Menandai Soal sebagai Ragu-ragu
+Siswa berada pada suatu soal.
+Siswa belum yakin terhadap jawabannya atau belum ingin menetapkan jawaban.
+Siswa memilih status ragu-ragu.
+Sistem mencatat status tersebut.
+Indikator soal berubah menjadi kuning.
+Siswa dapat kembali ke soal tersebut sebelum mengumpulkan ujian.
+ALT-02 — Siswa Belum Menjawab Soal
+Siswa berpindah dari suatu soal tanpa memilih jawaban.
+Sistem mencatat soal sebagai belum dijawab.
+Indikator soal ditampilkan sebagai merah.
+Siswa dapat kembali mengerjakan soal tersebut selama waktu ujian masih tersedia.
+ALT-03 — Siswa Mengubah Jawaban
+Siswa kembali ke soal yang sebelumnya telah dijawab.
+Siswa memilih opsi jawaban yang berbeda.
+Sistem memperbarui jawaban.
+Status soal tetap terjawab (hijau) apabila tidak ditandai sebagai ragu-ragu.
+ALT-04 — Waktu Ujian Habis
+Timer mencapai 00:00.
+Sistem menghentikan kesempatan siswa untuk mengerjakan.
+Sistem menyimpan jawaban yang telah tercatat.
+Sistem mengakhiri sesi ujian.
+Jawaban yang tersimpan diproses untuk koreksi sesuai ketentuan sistem.
+EXC-01 — Koneksi Terputus
+Koneksi siswa terputus ketika ujian berlangsung.
+Sistem mendeteksi bahwa komunikasi dengan sesi ujian terganggu.
+Sistem mempertahankan data sesi yang terakhir berhasil tercatat.
+Setelah koneksi tersedia kembali, sistem melanjutkan sesi apabila waktu ujian masih tersedia.
+Jika waktu telah habis selama koneksi terputus, sistem mengikuti ALT-04.
+
+Mekanisme teknis penyimpanan atau pemulihan sesi tidak ditentukan pada use case ini karena merupakan bagian desain teknis HLD/LLD.
+
+EXC-02 — Pengacakan Gagal
+Sistem gagal memperoleh hasil pengacakan yang valid.
+Sistem tidak memulai pengerjaan dengan urutan yang belum tervalidasi.
+Sistem melakukan penanganan kegagalan sesuai mekanisme yang ditetapkan pada implementasi.
+Sesi hanya dapat dilanjutkan apabila urutan soal valid dan memenuhi aturan tanpa duplikasi.
+
+2. Acceptance Criteria
+AC-01 — Pengacakan Soal Berhasil dengan Fisher-Yates Tanpa Duplikasi
+Scenario: Pengacakan 50 soal berhasil tanpa pengulangan
+  Given siswa memiliki ujian yang terdiri dari 50 soal
+  And setiap soal memiliki nomor identifikasi yang unik
+  When siswa memulai sesi ujian
+  Then sistem harus menjalankan Fisher-Yates Shuffle terhadap 50 soal
+  And sistem harus menghasilkan 50 posisi soal
+  And setiap nomor soal harus muncul tepat satu kali
+  And tidak boleh terdapat nomor soal yang muncul lebih dari satu kali
+  And proses pengacakan harus selesai dalam waktu kurang dari 2 detik
+Parameter pengujian
+Jumlah soal: 50 soal.
+Jumlah output: 50 posisi soal.
+Duplikasi: 0 soal duplikat.
+Kelengkapan: 100% nomor soal tersedia tepat satu kali.
+Batas waktu pengacakan: < 2 detik.
+Metode: Fisher-Yates Shuffle.
+Kriteria kuantitatif
+$$ \text{Akurasi pengacakan} = \frac{\text{jumlah soal unik pada output}} {\text{jumlah soal input}} \times 100\% $$
+
+Target: 100%.
+
+Dengan 50 soal, output dinyatakan valid apabila terdapat 50 nomor soal unik dari 50 nomor input.
+
+AC-02 — Indikator Status Soal dan Timer
+Scenario: Siswa melihat status soal dan sisa waktu selama ujian
+  Given siswa sedang mengerjakan ujian
+  And ujian memiliki batas waktu yang telah ditentukan
+  When siswa menjawab sebuah soal
+  Then sistem harus mencatat soal sebagai "Terjawab"
+  And indikator soal harus menunjukkan status hijau
+
+  When siswa menandai sebuah soal sebagai ragu-ragu
+  Then sistem harus mencatat status soal sebagai "Ragu-ragu"
+  And indikator soal harus menunjukkan status kuning
+
+  When siswa belum memberikan jawaban pada sebuah soal
+  Then indikator soal harus menunjukkan status merah
+
+  And sistem harus menampilkan sisa waktu ujian
+  And timer harus berkurang selama ujian masih berlangsung
+
+Kriteria verifikasi
+| Status        | Kondisi                               | Indikator  |
+| ------------- | ------------------------------------- | ---------- |
+| Terjawab      | Siswa telah memberikan jawaban        | **Hijau**  |
+| Ragu-ragu     | Siswa menandai soal sebagai ragu-ragu | **Kuning** |
+| Belum dijawab | Siswa belum memberikan jawaban        | **Merah**  |
+Timer harus menunjukkan sisa waktu selama sesi ujian masih aktif.
+
+AC-03 — Koneksi Terputus / Sesi Habis
+Scenario: Koneksi terputus ketika ujian masih berlangsung
+  Given siswa sedang mengerjakan ujian
+  And masih terdapat waktu tersisa
+  When koneksi siswa terputus
+  Then sistem harus mempertahankan data sesi yang terakhir berhasil tercatat
+  And sistem tidak boleh menganggap jawaban yang belum berhasil tercatat sebagai jawaban tersimpan
+
+  When koneksi kembali tersedia
+  And waktu ujian masih tersisa
+  Then siswa dapat melanjutkan sesi ujian
+
+Scenario: Waktu ujian habis
+  Given siswa sedang mengerjakan ujian
+  And timer menunjukkan sisa waktu
+  When timer mencapai 00:00
+  Then sistem harus mengakhiri kesempatan pengerjaan
+  And sistem harus menyimpan jawaban yang telah berhasil tercatat
+  And sistem harus mengakhiri sesi ujian
+  And jawaban yang tersimpan dapat diproses untuk koreksi
+Kriteria kuantitatif
+Jawaban yang berhasil tercatat sebelum gangguan harus tetap tersedia.
+Jawaban yang belum berhasil tercatat tidak boleh dianggap tersimpan.
+Ketika timer mencapai 00:00, sesi tidak lagi menerima pengerjaan baru.
+Tidak ada soal tambahan atau duplikasi soal yang muncul akibat gangguan sesi.
+
+Ringkasan Traceability
+| Komponen Use Case        | User Story / SRS                 |
+| ------------------------ | -------------------------------- |
+| Akses dan memulai ujian  | US-01, FR-01                     |
+| Melihat instruksi        | US-07, FR-03                     |
+| Mengerjakan soal         | US-08, FR-04, FR-07              |
+| **Pengacakan soal ★**    | **US-09, FR-05, NFR-01, NFR-05** |
+| **Pengacakan opsi ★**    | **US-10, FR-06, NFR-06**         |
+| Status ragu-ragu         | US-11                            |
+| **Timer**                | US-12                            |
+| Pengumpulan jawaban      | US-13, FR-08                     |
+| Koreksi otomatis         | US-14, FR-09                     |
+| Skor evaluasi            | US-15, FR-10, FR-11              |
+| Kelancaran/responsivitas | US-21, NFR-04, NFR-11, NFR-12    |
+
+Catatan QA
+
+Ada satu hal penting untuk konsistensi dokumen: timer, indikator hijau/kuning/merah, dan reset login siswa memang diminta sebagai bagian fungsionalitas riset, tetapi pada SRS Tahap 2 belum semuanya memiliki FR eksplisit. Karena itu, pada level QA sebaiknya ketiga fitur tersebut terlebih dahulu dimasukkan sebagai requirement formal SRS sebelum dibuat test case final.
+
+Untuk fitur utama Fisher-Yates, requirement sudah memiliki jalur traceability yang lebih kuat: PRD → FR-05 → US-09 → UC-01 → AC-01, dengan aturan bisnis inti bahwa tidak boleh ada soal yang muncul lebih dari satu kali dalam satu sesi ujian.
+
