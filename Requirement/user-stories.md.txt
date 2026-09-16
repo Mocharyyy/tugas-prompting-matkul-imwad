@@ -1,0 +1,2002 @@
+# DRAF USER STORIES
+
+## SRS PTM-02 — Sistem Informasi Ujian Online TKA Berbasis Web
+
+### 1. Tabel User Story
+
+| ID          | Narasi User Story                                                                                                                                                            | FR Asal | Prioritas MoSCoW | Kategori                  |
+| ----------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------- | ---------------- | ------------------------- |
+| **US-01**   | Sebagai **Siswa**, saya ingin dapat mengakses ujian yang tersedia bagi saya, sehingga saya dapat mengikuti ujian TKA sesuai jadwal.                                          | FR-01   | Must Have        | Akses Ujian               |
+| **US-02**   | Sebagai **Siswa**, saya ingin melihat jadwal ujian yang tersedia, sehingga saya mengetahui waktu pelaksanaan ujian TKA.                                                      | FR-02   | Must Have        | Jadwal Ujian              |
+| **US-03**   | Sebagai **Siswa**, saya ingin melihat instruksi ujian sebelum memulai, sehingga saya memahami ketentuan pelaksanaan ujian.                                                   | FR-03   | Must Have        | Pelaksanaan Ujian         |
+| **US-04**   | Sebagai **Siswa**, saya ingin mengerjakan soal pilihan ganda secara online, sehingga saya dapat mengikuti simulasi TKA melalui website.                                      | FR-04   | Must Have        | Pelaksanaan Ujian         |
+| **US-05** ★ | Sebagai **Siswa**, saya ingin mendapatkan urutan soal yang diacak menggunakan algoritma **Fisher-Yates Shuffle**, sehingga urutan soal pada sesi ujian tidak selalu sama.    | FR-05   | Must Have        | Algoritma/Pengacakan Soal |
+| **US-06** ★ | Sebagai **Siswa**, saya ingin mendapatkan urutan opsi jawaban yang diacak menggunakan algoritma **Fisher-Yates Shuffle**, sehingga posisi pilihan jawaban tidak selalu sama. | FR-06   | Must Have        | Algoritma/Pengacakan Opsi |
+| **US-07**   | Sebagai **Siswa**, saya ingin jawaban yang saya pilih tercatat oleh sistem, sehingga jawaban saya dapat digunakan dalam proses penilaian.                                    | FR-07   | Must Have        | Jawaban Ujian             |
+| **US-08**   | Sebagai **Siswa**, saya ingin dapat mengirimkan jawaban setelah menyelesaikan ujian, sehingga sesi ujian saya dapat diselesaikan dan diproses untuk penilaian.               | FR-08   | Must Have        | Pengumpulan Jawaban       |
+| **US-09**   | Sebagai **Siswa**, saya ingin jawaban saya dikoreksi secara otomatis setelah mengirimkan ujian, sehingga proses penilaian tidak perlu dilakukan secara manual.               | FR-09   | Must Have        | Penilaian                 |
+| **US-10**   | Sebagai **Siswa**, saya ingin sistem menghitung skor berdasarkan hasil koreksi jawaban, sehingga saya memperoleh nilai evaluasi dari ujian yang telah dikerjakan.            | FR-10   | Must Have        | Penilaian                 |
+| **US-11**   | Sebagai **Siswa**, saya ingin melihat skor setelah ujian selesai, sehingga saya dapat mengetahui hasil evaluasi saya.                                                        | FR-11   | Must Have        | Hasil Ujian               |
+| **US-12**   | Sebagai **Tentor/Admin**, saya ingin mengelola bank soal, sehingga soal yang digunakan dalam ujian dapat tersedia dan diperbarui sesuai kebutuhan.                           | FR-12   | Must Have        | Manajemen Bank Soal       |
+| **US-13**   | Sebagai **Tentor/Admin**, saya ingin mengelola jadwal ujian, sehingga ujian dapat tersedia bagi siswa sesuai waktu pelaksanaan yang ditentukan.                              | FR-13   | Must Have        | Manajemen Ujian           |
+| **US-14**   | Sebagai **Tentor/Admin**, saya ingin melihat rekap hasil evaluasi setelah hasil ujian tersedia, sehingga saya dapat memantau hasil ujian siswa.                              | FR-14   | Must Have        | Rekapitulasi              |
+| **US-15**   | Sebagai **Pemilik Bimbel**, saya ingin melihat hasil evaluasi ujian yang tersedia bagi saya, sehingga saya dapat memantau hasil pelaksanaan ujian.                           | FR-15   | Should Have      | Monitoring                |
+| **US-16**   | Sebagai **Siswa**, saya ingin melihat hasil ujian secara lebih terperinci, sehingga saya dapat mengetahui informasi hasil ujian secara lebih lengkap.                        | FR-16   | Should Have      | Hasil Ujian               |
+| **US-17**   | Sebagai **Siswa**, saya ingin mengetahui status ujian yang sedang atau telah saya ikuti, sehingga saya mengetahui kondisi pelaksanaan ujian saya.                            | FR-17   | Should Have      | Status Ujian              |
+| **US-18**   | Sebagai **Tentor/Admin**, saya ingin memfilter data pada rekap hasil evaluasi, sehingga saya dapat melihat data hasil ujian berdasarkan informasi yang dibutuhkan.           | FR-18   | Should Have      | Rekapitulasi              |
+| **US-19**   | Sebagai **Siswa**, saya ingin melihat riwayat ujian yang pernah saya ikuti, sehingga saya dapat mengetahui rekam hasil ujian sebelumnya.                                     | FR-19   | Should Have      | Riwayat Ujian             |
+| **US-20**   | Sebagai **Tentor/Admin**, saya ingin melihat statistik sederhana dari hasil ujian, sehingga saya dapat memperoleh ringkasan hasil evaluasi siswa.                            | FR-20   | Should Have      | Statistik Evaluasi        |
+
+---
+
+## 2. Evaluasi Prinsip INVEST
+
+INVEST digunakan untuk mengevaluasi apakah setiap User Story cukup baik untuk dikerjakan dalam satu increment/sprint.
+
+**I — Independent:** dapat dikerjakan relatif terpisah dari story lain.
+**N — Negotiable:** menjelaskan kebutuhan, bukan solusi teknis yang terlalu rinci.
+**V — Valuable:** memberikan manfaat yang jelas bagi pengguna/stakeholder.
+**E — Estimable:** ruang lingkup cukup jelas untuk diperkirakan effort-nya.
+**S — Small:** cukup kecil untuk dikerjakan dalam satu sprint; jika terlalu besar perlu dipecah.
+**T — Testable:** dapat diterjemahkan menjadi Acceptance Criteria yang dapat diuji.
+
+| ID      | I | N | V | E | S | T | Evaluasi                                                                                                   |
+| ------- | - | - | - | - | - | - | ---------------------------------------------------------------------------------------------------------- |
+| US-01   | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | Memenuhi INVEST                                                                                            |
+| US-02   | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | Memenuhi INVEST                                                                                            |
+| US-03   | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | Memenuhi INVEST                                                                                            |
+| US-04   | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | Memenuhi INVEST                                                                                            |
+| US-05 ★ | ✓ | ✓ | ✓ | ✓ | ⚠ | ✓ | Perlu diperhatikan karena algoritma dan validasi pengacakan dapat membutuhkan beberapa acceptance criteria |
+| US-06 ★ | ✓ | ✓ | ✓ | ✓ | ⚠ | ✓ | Masih dapat menjadi satu story jika ruang lingkup hanya pengacakan opsi jawaban                            |
+| US-07   | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | Memenuhi INVEST                                                                                            |
+| US-08   | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | Memenuhi INVEST                                                                                            |
+| US-09   | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | Memenuhi INVEST                                                                                            |
+| US-10   | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | Memenuhi INVEST                                                                                            |
+| US-11   | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | Memenuhi INVEST                                                                                            |
+| US-12   | ✓ | ✓ | ✓ | ✓ | ⚠ | ✓ | Berpotensi menjadi Epic jika CRUD bank soal dibuat lengkap                                                 |
+| US-13   | ✓ | ✓ | ✓ | ✓ | ⚠ | ✓ | Berpotensi menjadi Epic jika mencakup seluruh operasi pengelolaan jadwal                                   |
+| US-14   | ✓ | ✓ | ✓ | ✓ | ⚠ | ✓ | Masih cukup sebagai story pada scope rekap dasar                                                           |
+| US-15   | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | Memenuhi INVEST                                                                                            |
+| US-16   | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | Memenuhi INVEST                                                                                            |
+| US-17   | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | Memenuhi INVEST                                                                                            |
+| US-18   | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | Memenuhi INVEST                                                                                            |
+| US-19   | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | Memenuhi INVEST                                                                                            |
+| US-20   | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | Memenuhi INVEST                                                                                            |
+
+### Ringkasan Evaluasi
+
+Secara umum, **US-01 sampai US-20 telah memenuhi prinsip INVEST** pada tingkat draft. Namun terdapat tiga story yang perlu mendapat perhatian khusus:
+
+1. **US-05 — Pengacakan soal ★**
+   Perlu acceptance criteria yang memastikan algoritma Fisher-Yates menghasilkan urutan valid dan tidak menyebabkan duplikasi soal.
+
+2. **US-06 — Pengacakan opsi jawaban ★**
+   Perlu acceptance criteria yang memastikan seluruh opsi tetap tersedia dan tidak ada opsi yang hilang atau muncul lebih dari sekali.
+
+3. **US-12 dan US-13**
+   Berpotensi terlalu besar apabila istilah *mengelola* mencakup banyak operasi. Story tersebut sebaiknya dipecah menjadi story yang lebih kecil pada tahap berikutnya.
+
+---
+
+# 3. Pemecahan Story yang Berukuran Epic
+
+## 3.1 US-12 — Manajemen Bank Soal
+
+**Story awal:**
+
+> Sebagai Tentor/Admin, saya ingin mengelola bank soal, sehingga soal yang digunakan dalam ujian dapat tersedia dan diperbarui sesuai kebutuhan.
+
+Story ini berpotensi menjadi Epic karena aktivitas "mengelola" dapat mencakup beberapa kebutuhan berbeda.
+
+### Pecahan Story
+
+| ID          | Story Hasil Pecahan                                                                                                                   | FR Asal | Prioritas   |
+| ----------- | ------------------------------------------------------------------------------------------------------------------------------------- | ------- | ----------- |
+| **US-12.1** | Sebagai **Tentor/Admin**, saya ingin menambahkan soal ke bank soal, sehingga soal baru dapat digunakan dalam ujian.                   | FR-12   | Must Have   |
+| **US-12.2** | Sebagai **Tentor/Admin**, saya ingin melihat bank soal, sehingga saya dapat mengetahui soal yang tersedia untuk ujian.                | FR-12   | Must Have   |
+| **US-12.3** | Sebagai **Tentor/Admin**, saya ingin memperbarui soal dalam bank soal, sehingga informasi soal yang digunakan tetap sesuai kebutuhan. | FR-12   | Must Have   |
+| **US-12.4** | Sebagai **Tentor/Admin**, saya ingin menghapus soal dari bank soal, sehingga soal yang tidak diperlukan tidak digunakan dalam ujian.  | FR-12   | Should Have |
+
+> **Catatan:** Pemecahan di atas merupakan breakdown berdasarkan makna umum "mengelola". Detail operasi yang benar-benar diwajibkan perlu dikonfirmasi pada tahap Acceptance Criteria/SRS apabila belum ditetapkan.
+
+---
+
+## 3.2 US-13 — Manajemen Jadwal Ujian
+
+**Story awal:**
+
+> Sebagai Tentor/Admin, saya ingin mengelola jadwal ujian, sehingga ujian dapat tersedia bagi siswa sesuai waktu pelaksanaan yang ditentukan.
+
+Story ini juga berpotensi menjadi Epic apabila pengelolaan jadwal mencakup beberapa aktivitas.
+
+### Pecahan Story
+
+| ID          | Story Hasil Pecahan                                                                                                                 | FR Asal | Prioritas   |
+| ----------- | ----------------------------------------------------------------------------------------------------------------------------------- | ------- | ----------- |
+| **US-13.1** | Sebagai **Tentor/Admin**, saya ingin membuat jadwal ujian, sehingga ujian dapat ditentukan waktu pelaksanaannya.                    | FR-13   | Must Have   |
+| **US-13.2** | Sebagai **Tentor/Admin**, saya ingin melihat jadwal ujian, sehingga saya dapat mengetahui jadwal yang telah dibuat.                 | FR-13   | Must Have   |
+| **US-13.3** | Sebagai **Tentor/Admin**, saya ingin memperbarui jadwal ujian, sehingga waktu pelaksanaan dapat disesuaikan jika terjadi perubahan. | FR-13   | Should Have |
+| **US-13.4** | Sebagai **Tentor/Admin**, saya ingin menghapus jadwal ujian yang tidak diperlukan, sehingga jadwal yang tersedia tetap relevan.     | FR-13   | Should Have |
+
+> **Catatan:** Story di atas tidak menambahkan aturan teknis tentang bagaimana jadwal disimpan atau diimplementasikan.
+
+---
+
+## 3.3 US-05 — Pengacakan Urutan Soal ★
+
+US-05 merupakan fitur algoritma utama sehingga dapat dipertahankan sebagai satu story apabila implementasi algoritma Fisher-Yates dianggap satu unit pekerjaan.
+
+Namun untuk pengujian yang lebih terstruktur, story dapat dibagi menjadi:
+
+| ID          | Story Hasil Pecahan                                                                                                                                      | FR Asal | Prioritas |
+| ----------- | -------------------------------------------------------------------------------------------------------------------------------------------------------- | ------- | --------- |
+| **US-05.1** | Sebagai **Siswa**, saya ingin mendapatkan urutan soal yang diacak menggunakan Fisher-Yates ketika memulai ujian, sehingga urutan soal tidak selalu sama. | FR-05   | Must Have |
+| **US-05.2** | Sebagai **Siswa**, saya ingin setiap soal muncul paling banyak satu kali dalam satu sesi ujian, sehingga tidak terjadi duplikasi soal.                   | FR-05   | Must Have |
+| **US-05.3** | Sebagai **Siswa**, saya ingin seluruh soal yang ditentukan tersedia setelah pengacakan, sehingga tidak ada soal yang hilang dari sesi ujian.             | FR-05   | Must Have |
+
+### Catatan INVEST
+
+Untuk proyek satu semester, **US-05.1–US-05.3 dapat diperlakukan sebagai satu Feature/Story Group** dalam backlog apabila pemecahan tersebut membuat pekerjaan terlalu kecil. Acceptance Criteria tetap perlu mencakup seluruh validasi pengacakan.
+
+---
+
+## 3.4 US-06 — Pengacakan Opsi Jawaban ★
+
+US-06 juga dapat dipertahankan sebagai satu story karena memiliki satu tujuan bisnis yang jelas.
+
+Apabila perlu dipecah untuk pengujian:
+
+| ID          | Story Hasil Pecahan                                                                                                                                    | FR Asal | Prioritas |
+| ----------- | ------------------------------------------------------------------------------------------------------------------------------------------------------ | ------- | --------- |
+| **US-06.1** | Sebagai **Siswa**, saya ingin opsi jawaban diacak menggunakan Fisher-Yates, sehingga posisi opsi jawaban dapat berbeda.                                | FR-06   | Must Have |
+| **US-06.2** | Sebagai **Siswa**, saya ingin seluruh opsi jawaban tetap tersedia setelah pengacakan, sehingga tidak ada opsi yang hilang atau muncul secara duplikat. | FR-06   | Must Have |
+
+---
+
+# 4. Rekomendasi Struktur Backlog
+
+Berdasarkan hasil evaluasi INVEST, struktur backlog dapat disusun menjadi:
+
+### Epic 1 — Akses dan Pelaksanaan Ujian
+
+* US-01 Akses ujian
+* US-02 Melihat jadwal
+* US-03 Melihat instruksi
+* US-04 Mengerjakan soal
+* US-07 Mencatat jawaban
+* US-08 Mengirim jawaban
+
+### Epic 2 — Algoritma Pengacakan ★
+
+* US-05 Pengacakan urutan soal
+
+  * US-05.1 Menjalankan pengacakan
+  * US-05.2 Validasi tidak ada duplikasi
+  * US-05.3 Validasi seluruh soal tersedia
+* US-06 Pengacakan opsi jawaban
+
+  * US-06.1 Mengacak opsi
+  * US-06.2 Validasi opsi
+
+### Epic 3 — Penilaian dan Hasil
+
+* US-09 Koreksi otomatis
+* US-10 Perhitungan skor
+* US-11 Tampilan skor
+* US-16 Detail hasil
+
+### Epic 4 — Manajemen Bank Soal dan Ujian
+
+* US-12 Manajemen bank soal
+
+  * US-12.1 Tambah soal
+  * US-12.2 Lihat soal
+  * US-12.3 Ubah soal
+  * US-12.4 Hapus soal
+* US-13 Manajemen jadwal
+
+  * US-13.1 Buat jadwal
+  * US-13.2 Lihat jadwal
+  * US-13.3 Ubah jadwal
+  * US-13.4 Hapus jadwal
+
+### Epic 5 — Evaluasi dan Monitoring
+
+* US-14 Rekap hasil evaluasi
+* US-15 Monitoring oleh Pemilik Bimbel
+* US-17 Status ujian
+* US-18 Filter rekap
+* US-19 Riwayat ujian
+* US-20 Statistik sederhana
+
+---
+
+## 5. Traceability Ringkas
+
+| Area SRS                  | User Stories           |
+| ------------------------- | ---------------------- |
+| FR-01 Akses ujian         | US-01                  |
+| FR-02 Jadwal ujian        | US-02                  |
+| FR-03 Instruksi           | US-03                  |
+| FR-04 Soal pilihan ganda  | US-04                  |
+| FR-05 ★ Pengacakan soal   | US-05, US-05.1–US-05.3 |
+| FR-06 ★ Pengacakan opsi   | US-06, US-06.1–US-06.2 |
+| FR-07 Pencatatan jawaban  | US-07                  |
+| FR-08 Submit ujian        | US-08                  |
+| FR-09 Koreksi otomatis    | US-09                  |
+| FR-10 Perhitungan skor    | US-10                  |
+| FR-11 Tampilan skor       | US-11                  |
+| FR-12 Manajemen bank soal | US-12, US-12.1–US-12.4 |
+| FR-13 Manajemen jadwal    | US-13, US-13.1–US-13.4 |
+| FR-14 Rekap hasil         | US-14                  |
+| FR-15 Monitoring Pemilik  | US-15                  |
+| FR-16 Detail hasil        | US-16                  |
+| FR-17 Status ujian        | US-17                  |
+| FR-18 Filter rekap        | US-18                  |
+| FR-19 Riwayat ujian       | US-19                  |
+| FR-20 Statistik sederhana | US-20                  |
+
+### Kesimpulan
+
+Dari **20 FR**, diperoleh **20 User Stories utama**. Fitur algoritma utama **★ Fisher-Yates** direpresentasikan secara eksplisit pada **US-05 dan US-06**. Dua area yang paling jelas berpotensi menjadi Epic adalah **manajemen bank soal (US-12)** dan **manajemen jadwal ujian (US-13)**, sehingga keduanya telah dipecah menjadi story yang lebih kecil.
+
+Untuk tahap berikutnya, setiap **Must Have User Story** sebaiknya diturunkan menjadi **Acceptance Criteria berbasis Given–When–Then**, terutama US-05 dan US-06 karena keduanya merupakan fitur inti algoritma penelitian.
+
+# DRAFT USE CASE
+
+## Sistem Informasi Ujian Online TKA Berbasis Web
+
+### 1. Daftar Use Case
+
+| ID        | Nama Use Case                            | User Story | Prioritas |
+| --------- | ---------------------------------------- | ---------- | --------- |
+| **UC-01** | Mengakses Ujian                          | US-01      | Must Have |
+| **UC-02** | Melihat Jadwal Ujian                     | US-02      | Must Have |
+| **UC-03** | Melihat Instruksi Ujian                  | US-03      | Must Have |
+| **UC-04** | Mengerjakan Ujian                        | US-04      | Must Have |
+| **UC-05** | Mengacak Urutan Soal dengan Fisher-Yates | US-05      | Must Have |
+
+> **Fokus utama analisis:** UC-05 sebagai layanan algoritmik yang dijalankan oleh **Fisher-Yates Shuffle Engine pada backend Express.js**. UC-01 sampai UC-04 merupakan alur pendukung yang mengantarkan Siswa menuju proses pengacakan dan pelaksanaan ujian.
+
+---
+
+# UC-01 — Mengakses Ujian
+
+### ID & Nama
+
+**UC-01 — Mengakses Ujian**
+
+### Aktor
+
+**Aktor Utama:**
+
+* Siswa
+
+**Aktor Pendukung:**
+
+* Sistem Ujian
+* Backend Express.js
+
+### Precondition
+
+1. Siswa memiliki akses ke sistem.
+2. Terdapat ujian yang tersedia bagi Siswa.
+3. Ujian berada dalam periode pelaksanaan yang ditentukan.
+4. Sistem dapat mengakses data ujian.
+
+### Postcondition
+
+**Berhasil:**
+
+* Siswa memperoleh akses ke ujian yang tersedia.
+* Sistem menampilkan informasi ujian yang dapat diikuti.
+
+**Gagal:**
+
+* Siswa tidak dapat masuk ke ujian.
+* Sistem menampilkan informasi bahwa ujian tidak dapat diakses.
+
+### Alur Utama
+
+1. Siswa membuka daftar ujian.
+2. Sistem memeriksa ketersediaan ujian.
+3. Sistem memeriksa hak akses Siswa terhadap ujian.
+4. Sistem memeriksa status/periode ujian.
+5. Sistem menampilkan ujian yang dapat diikuti.
+6. Siswa memilih ujian.
+7. Sistem mengarahkan Siswa menuju informasi/instruksi ujian.
+
+### Alur Alternatif
+
+**A1 — Ujian belum dimulai**
+
+1. Sistem mendeteksi bahwa waktu pelaksanaan belum dimulai.
+2. Sistem menampilkan status ujian belum tersedia.
+3. Siswa tidak dapat memulai ujian.
+
+**A2 — Ujian telah berakhir**
+
+1. Sistem mendeteksi periode ujian telah berakhir.
+2. Sistem menampilkan status ujian telah berakhir.
+3. Siswa tidak dapat memulai ujian.
+
+### Alur Eksepsi
+
+**E1 — Backend tidak dapat diakses**
+
+1. Permintaan akses dikirim ke backend.
+2. Backend tidak memberikan respons dalam batas waktu yang ditentukan.
+3. Sistem menampilkan informasi bahwa layanan sementara tidak tersedia.
+4. Siswa dapat mencoba kembali.
+
+---
+
+# UC-02 — Melihat Jadwal Ujian
+
+### ID & Nama
+
+**UC-02 — Melihat Jadwal Ujian**
+
+### Aktor
+
+**Aktor Utama:**
+
+* Siswa
+
+**Aktor Pendukung:**
+
+* Backend Express.js
+
+### Precondition
+
+1. Siswa telah mengakses sistem.
+2. Data jadwal ujian tersedia pada sistem.
+
+### Postcondition
+
+**Berhasil:**
+
+* Jadwal ujian ditampilkan kepada Siswa.
+
+**Gagal:**
+
+* Jadwal tidak dapat ditampilkan.
+* Sistem memberikan informasi kegagalan pengambilan data.
+
+### Alur Utama
+
+1. Siswa membuka halaman jadwal ujian.
+2. Sistem meminta data jadwal kepada backend.
+3. Backend mengambil data jadwal ujian.
+4. Backend mengirimkan data kepada sistem.
+5. Sistem menampilkan jadwal kepada Siswa.
+6. Siswa memilih ujian yang tersedia.
+
+### Alur Alternatif
+
+**A1 — Tidak terdapat ujian aktif**
+
+1. Backend tidak menemukan ujian yang tersedia.
+2. Sistem menampilkan informasi bahwa belum terdapat ujian yang dapat diikuti.
+
+### Alur Eksepsi
+
+**E1 — Timeout server**
+
+1. Sistem mengirimkan permintaan data jadwal.
+2. Backend tidak memberikan respons dalam batas waktu yang ditentukan.
+3. Sistem membatalkan permintaan.
+4. Sistem menampilkan pesan kegagalan.
+5. Siswa dapat mencoba kembali.
+
+---
+
+# UC-03 — Melihat Instruksi Ujian
+
+### ID & Nama
+
+**UC-03 — Melihat Instruksi Ujian**
+
+### Aktor
+
+**Aktor Utama:**
+
+* Siswa
+
+**Aktor Pendukung:**
+
+* Sistem Ujian
+* Backend Express.js
+
+### Precondition
+
+1. Siswa telah memilih ujian.
+2. Data instruksi ujian tersedia.
+
+### Postcondition
+
+**Berhasil:**
+
+* Instruksi ujian ditampilkan.
+* Siswa dapat memahami ketentuan sebelum memulai ujian.
+
+**Gagal:**
+
+* Instruksi tidak dapat ditampilkan.
+* Ujian belum dimulai.
+
+### Alur Utama
+
+1. Siswa memilih ujian.
+2. Sistem meminta data instruksi.
+3. Backend mengirimkan data instruksi.
+4. Sistem menampilkan instruksi.
+5. Siswa membaca instruksi.
+6. Siswa memilih untuk memulai ujian.
+7. Sistem memulai proses pembuatan sesi ujian.
+
+### Alur Alternatif
+
+**A1 — Siswa tidak melanjutkan**
+
+1. Siswa membaca instruksi.
+2. Siswa memilih kembali atau meninggalkan halaman.
+3. Sistem tidak membuat sesi ujian baru.
+
+### Alur Eksepsi
+
+**E1 — Data instruksi gagal diambil**
+
+1. Sistem meminta data instruksi.
+2. Backend gagal menyediakan data.
+3. Sistem menampilkan pesan bahwa instruksi tidak dapat dimuat.
+4. Siswa dapat mencoba kembali.
+
+---
+
+# UC-04 — Mengerjakan Ujian
+
+### ID & Nama
+
+**UC-04 — Mengerjakan Ujian**
+
+### Aktor
+
+**Aktor Utama:**
+
+* Siswa
+
+**Aktor Pendukung:**
+
+* Backend Express.js
+* Fisher-Yates Shuffle Engine
+
+### Precondition
+
+1. Siswa telah memperoleh akses ke ujian.
+2. Siswa telah membaca instruksi.
+3. Sesi ujian dapat dibuat.
+4. Bank soal tersedia.
+5. Soal yang digunakan memenuhi format ujian.
+
+### Postcondition
+
+**Berhasil:**
+
+* Siswa memperoleh soal ujian dalam urutan yang telah diacak.
+* Jawaban Siswa dapat dicatat.
+* Siswa dapat menyelesaikan sesi ujian.
+
+**Gagal:**
+
+* Sesi ujian tidak dimulai apabila data soal tidak valid atau proses pengacakan gagal.
+
+### Alur Utama
+
+1. Siswa memilih **Mulai Ujian**.
+2. Sistem membuat sesi ujian.
+3. Backend mengambil kumpulan soal yang digunakan untuk ujian.
+4. Backend meneruskan kumpulan soal ke **Fisher-Yates Shuffle Engine**.
+5. Engine mengacak urutan soal.
+6. Sistem melakukan validasi hasil pengacakan.
+7. Sistem memastikan jumlah soal sesuai dengan data sumber.
+8. Sistem memastikan tidak terdapat soal yang muncul lebih dari satu kali.
+9. Sistem mengirimkan hasil pengacakan ke proses penyajian ujian.
+10. Sistem menampilkan soal kepada Siswa.
+11. Siswa memilih jawaban.
+12. Sistem mencatat jawaban Siswa.
+13. Siswa berpindah ke soal berikutnya.
+14. Sistem mempertahankan urutan hasil pengacakan selama sesi berlangsung.
+15. Siswa menyelesaikan seluruh soal.
+16. Siswa mengirimkan jawaban.
+17. Sistem menyimpan hasil sesi untuk proses evaluasi.
+
+### Alur Alternatif
+
+**A1 — Siswa berpindah antarsoal**
+
+1. Siswa memilih navigasi ke soal lain.
+2. Sistem mengambil soal berdasarkan urutan sesi yang telah dibuat.
+3. Sistem tidak melakukan pengacakan ulang.
+4. Sistem menampilkan soal sesuai urutan sesi.
+
+**A2 — Siswa mengubah jawaban**
+
+1. Siswa kembali ke soal sebelumnya.
+2. Sistem menampilkan soal berdasarkan urutan sesi.
+3. Siswa mengubah pilihan jawaban.
+4. Sistem memperbarui jawaban Siswa.
+
+**A3 — Siswa mengakhiri ujian sebelum seluruh soal dikerjakan**
+
+1. Siswa memilih opsi pengumpulan ujian.
+2. Sistem memeriksa jawaban yang telah tercatat.
+3. Sistem menyimpan data sesi.
+4. Sistem melanjutkan proses pengumpulan untuk evaluasi.
+
+---
+
+# UC-05 — Mengacak Urutan Soal dengan Fisher-Yates
+
+### ID & Nama
+
+**UC-05 — Mengacak Urutan Soal dengan Fisher-Yates Shuffle**
+
+### Aktor
+
+**Aktor Utama:**
+
+* Fisher-Yates Shuffle Engine
+
+**Aktor Pendukung:**
+
+* Siswa
+* Backend Express.js
+* Database
+
+### Deskripsi
+
+Use Case ini menangani proses pengacakan urutan soal ketika Siswa memulai sesi ujian. Backend Express.js mengambil kumpulan soal yang telah ditentukan, kemudian memprosesnya menggunakan **algoritma Fisher-Yates Shuffle** untuk menghasilkan urutan soal yang berbeda.
+
+Hasil pengacakan harus divalidasi sebelum digunakan pada sesi ujian. Validasi terutama memastikan jumlah soal tetap sesuai dan setiap soal hanya muncul satu kali dalam satu sesi.
+
+### Precondition
+
+1. Siswa memiliki akses terhadap ujian.
+2. Ujian berada dalam periode pelaksanaan.
+3. Bank soal tersedia.
+4. Kumpulan soal untuk ujian dapat diperoleh.
+5. Setiap soal memiliki identitas yang dapat dibedakan.
+6. Backend Express.js dapat menerima permintaan pembuatan sesi ujian.
+7. Fisher-Yates Shuffle Engine tersedia untuk memproses kumpulan soal.
+
+### Postcondition
+
+**Berhasil:**
+
+1. Urutan soal berhasil diacak menggunakan Fisher-Yates.
+2. Jumlah soal hasil pengacakan sama dengan jumlah soal input.
+3. Setiap soal muncul tepat satu kali dalam hasil pengacakan.
+4. Urutan hasil pengacakan tersedia untuk sesi ujian.
+5. Siswa dapat melanjutkan ke proses pengerjaan ujian.
+
+**Gagal:**
+
+1. Sistem tidak menggunakan hasil pengacakan yang tidak valid.
+2. Sesi ujian tidak dilanjutkan apabila hasil pengacakan tidak dapat divalidasi.
+3. Sistem memberikan informasi kegagalan kepada proses pemanggil.
+
+---
+
+## Alur Utama UC-05
+
+1. Siswa memilih **Mulai Ujian**.
+2. Sistem mengirim permintaan pembuatan sesi kepada backend Express.js.
+3. Backend memvalidasi akses Siswa dan ujian.
+4. Backend mengambil kumpulan soal dari sumber data.
+5. Backend memeriksa apakah kumpulan soal tersedia.
+6. Backend mengirim kumpulan soal ke **Fisher-Yates Shuffle Engine**.
+7. Engine melakukan proses pengacakan.
+8. Engine menghasilkan urutan soal baru.
+9. Backend menerima hasil pengacakan.
+10. Backend memvalidasi jumlah soal hasil pengacakan.
+11. Backend memvalidasi keunikan identitas setiap soal.
+12. Sistem memastikan tidak terdapat soal yang muncul lebih dari satu kali.
+13. Jika hasil valid, backend menyimpan/meneruskan urutan soal untuk sesi tersebut.
+14. Sistem mengirimkan hasil sesi kepada Siswa.
+15. Siswa mulai mengerjakan soal menggunakan urutan yang telah ditetapkan.
+16. Sistem tidak melakukan pengacakan ulang selama sesi tersebut.
+
+### Batas Kinerja
+
+Proses pengacakan harus mengikuti **NFR-02** terkait latensi pengacakan.
+
+**Target numerik NFR-02: [BELUM DITETAPKAN]** apabila pada SRS belum terdapat angka batas waktu spesifik.
+
+Karena itu, angka latensi tidak ditetapkan secara baru dalam Use Case ini. Pengukuran perlu dilakukan dari saat **Fisher-Yates Shuffle Engine mulai memproses data hingga hasil pengacakan tersedia untuk proses berikutnya**.
+
+---
+
+# Alur Alternatif UC-05
+
+### A1 — Hasil pengacakan valid tetapi urutannya kebetulan sama
+
+1. Fisher-Yates menghasilkan urutan yang valid.
+2. Jumlah soal sesuai.
+3. Tidak terdapat duplikasi.
+4. Semua soal tersedia.
+5. Sistem menerima hasil tersebut sebagai urutan sesi yang valid.
+
+> Kesamaan urutan dengan sesi sebelumnya tidak otomatis berarti proses gagal karena Fisher-Yates menghasilkan urutan secara acak.
+
+### A2 — Siswa membuka kembali soal
+
+1. Siswa meminta soal berikutnya atau sebelumnya.
+2. Sistem mengambil posisi soal berdasarkan urutan sesi.
+3. Sistem tidak menjalankan Fisher-Yates kembali.
+4. Sistem menampilkan soal sesuai urutan sesi.
+
+### A3 — Pengacakan opsi jawaban
+
+Jika fitur pengacakan opsi jawaban juga digunakan pada sesi tersebut:
+
+1. Sistem mengambil opsi jawaban dari soal.
+2. Fisher-Yates Shuffle Engine memproses opsi jawaban.
+3. Sistem memvalidasi seluruh opsi tetap tersedia.
+4. Sistem menampilkan opsi dalam urutan hasil pengacakan.
+
+> Pengacakan opsi merupakan proses terpisah dari pengacakan urutan soal, meskipun dapat menggunakan engine algoritma yang sama.
+
+---
+
+# Alur Eksepsi Khusus UC-05
+
+## E1 — Data Soal Kosong
+
+**Kondisi:** Backend tidak menemukan soal untuk ujian.
+
+1. Backend meminta kumpulan soal.
+2. Hasil pengambilan data kosong.
+3. Backend menghentikan proses pengacakan.
+4. Fisher-Yates Shuffle Engine tidak dijalankan terhadap kumpulan kosong sebagai sesi ujian.
+5. Sistem tidak membuat sesi ujian yang dapat dikerjakan.
+6. Sistem mencatat/menyampaikan bahwa soal ujian tidak tersedia.
+7. Siswa tidak melanjutkan ke halaman pengerjaan.
+
+**Postcondition:** Tidak ada sesi ujian aktif yang menggunakan kumpulan soal kosong.
+
+---
+
+## E2 — Data Soal Tidak Valid
+
+**Kondisi:** Terdapat soal yang tidak memiliki identitas yang valid atau data soal tidak memenuhi struktur yang dibutuhkan.
+
+1. Backend mengambil data soal.
+2. Sistem melakukan validasi data.
+3. Ditemukan data soal tidak valid.
+4. Sistem menghentikan proses pengacakan.
+5. Data tidak valid tidak digunakan untuk sesi ujian.
+6. Sistem memberikan informasi kegagalan kepada proses pemanggil.
+
+---
+
+## E3 — Timeout Server saat Pengambilan Soal
+
+**Kondisi:** Backend tidak memperoleh data soal dalam batas waktu yang ditentukan.
+
+1. Sistem mengirim permintaan data soal.
+2. Backend tidak memberikan respons dalam batas waktu.
+3. Permintaan dianggap timeout.
+4. Proses pembuatan sesi dihentikan.
+5. Sistem tidak menggunakan data soal yang belum berhasil diterima.
+6. Siswa mendapatkan informasi bahwa ujian belum dapat dimulai.
+7. Siswa dapat melakukan percobaan kembali sesuai mekanisme sistem.
+
+---
+
+## E4 — Timeout pada Proses Pengacakan
+
+**Kondisi:** Proses Fisher-Yates tidak menghasilkan respons dalam batas latensi NFR-02.
+
+1. Backend menjalankan Fisher-Yates Shuffle Engine.
+2. Sistem mengukur waktu proses.
+3. Batas latensi NFR-02 terlampaui.
+4. Sistem menganggap proses pengacakan tidak memenuhi persyaratan performa.
+5. Hasil pengacakan tidak langsung digunakan sebelum status proses ditentukan.
+6. Sistem menghentikan atau menangani proses sesuai mekanisme kegagalan yang ditetapkan pada implementasi.
+7. Siswa memperoleh informasi bahwa sesi ujian belum dapat dimulai.
+
+**Catatan:** Nilai batas waktu spesifik **[BELUM DITETAPKAN]** karena NFR-02 pada konteks SRS belum menyediakan angka numerik.
+
+---
+
+## E5 — Hasil Pengacakan Mengandung Duplikasi
+
+**Kondisi:** Hasil Fisher-Yates memiliki nomor/ID soal yang muncul lebih dari satu kali.
+
+1. Engine menghasilkan urutan soal.
+2. Backend melakukan validasi hasil.
+3. Sistem menemukan ID soal yang sama muncul lebih dari satu kali.
+4. Hasil pengacakan ditolak.
+5. Urutan yang tidak valid tidak diberikan kepada Siswa.
+6. Sesi tidak dilanjutkan menggunakan hasil tersebut.
+7. Sistem mencatat kegagalan untuk ditangani oleh mekanisme error aplikasi.
+
+**Kriteria validasi:**
+
+`Jumlah ID unik = jumlah soal hasil pengacakan = jumlah soal input`
+
+Jika kondisi tersebut tidak terpenuhi, hasil pengacakan dinyatakan **tidak valid**.
+
+---
+
+## E6 — Jumlah Soal Hasil Pengacakan Tidak Sesuai
+
+**Kondisi:** Jumlah soal hasil shuffle berbeda dengan jumlah soal input.
+
+1. Backend menerima hasil pengacakan.
+2. Backend membandingkan jumlah input dan output.
+3. Ditemukan perbedaan jumlah.
+4. Hasil pengacakan ditolak.
+5. Sesi ujian tidak dimulai menggunakan hasil tersebut.
+6. Sistem memberikan informasi kegagalan.
+
+---
+
+## E7 — Koneksi Siswa Terputus Setelah Sesi Berhasil Dibuat
+
+**Kondisi:** Koneksi antara Siswa dan sistem terputus setelah urutan soal berhasil dibuat.
+
+1. Sesi ujian telah berhasil dibuat.
+2. Urutan soal telah berhasil divalidasi.
+3. Koneksi Siswa terputus.
+4. Sistem mempertahankan data sesi yang telah berhasil tersimpan sesuai mekanisme sistem.
+5. Siswa dapat melanjutkan sesi apabila koneksi kembali dan sesi masih valid.
+
+> Detail mekanisme persistence, session recovery, dan timeout sesi merupakan bagian implementasi teknis dan tidak ditetapkan dalam Use Case ini.
+
+---
+
+# UC-06 — Rekapitulasi Hasil Ujian
+
+### ID & Nama
+
+**UC-06 — Melihat Rekapitulasi Hasil Ujian**
+
+### Aktor
+
+**Aktor Utama:**
+
+* Tentor/Admin
+
+**Aktor Pendukung:**
+
+* Backend Express.js
+* Sistem Penilaian
+* Database
+
+### Precondition
+
+1. Ujian telah selesai.
+2. Jawaban Siswa telah tersedia.
+3. Proses koreksi telah selesai atau hasil evaluasi telah tersedia.
+4. Tentor/Admin memiliki hak akses terhadap data evaluasi.
+
+### Postcondition
+
+**Berhasil:**
+
+* Rekap hasil evaluasi tersedia bagi Tentor/Admin.
+* Data dapat digunakan untuk pemantauan hasil ujian.
+
+**Gagal:**
+
+* Rekap tidak ditampilkan apabila data hasil belum tersedia atau proses pengambilan data gagal.
+
+### Alur Utama
+
+1. Tentor/Admin membuka halaman rekapitulasi.
+2. Sistem meminta data hasil ujian.
+3. Backend mengambil data evaluasi.
+4. Sistem memastikan data hasil telah tersedia.
+5. Sistem menyiapkan rekapitulasi.
+6. Rekapitulasi ditampilkan kepada Tentor/Admin.
+
+### Batas Kinerja NFR-03
+
+Rekapitulasi hasil harus tersedia **≤ 1 menit setelah hasil ujian tersedia**, sesuai NFR-03.
+
+Pengukuran dilakukan dari:
+
+**Hasil ujian tersedia → Rekapitulasi dapat diakses oleh pengguna yang berwenang.**
+
+### Alur Alternatif
+
+**A1 — Belum terdapat hasil ujian**
+
+1. Sistem memeriksa data hasil.
+2. Data hasil belum tersedia.
+3. Sistem menampilkan status bahwa rekap belum tersedia.
+4. Tentor/Admin dapat melakukan pengecekan kembali.
+
+### Alur Eksepsi
+
+**E1 — Timeout pengambilan rekap**
+
+1. Tentor/Admin meminta data rekap.
+2. Backend tidak memberikan respons dalam batas waktu layanan.
+3. Sistem menampilkan pesan bahwa rekap belum dapat dimuat.
+4. Sistem tidak menampilkan data yang belum berhasil diperoleh.
+
+**E2 — Data evaluasi tidak lengkap**
+
+1. Backend memperoleh sebagian data evaluasi.
+2. Sistem mendeteksi data yang diperlukan belum lengkap.
+3. Rekap tidak dinyatakan selesai.
+4. Sistem menampilkan status bahwa data evaluasi belum lengkap.
+5. Rekap dapat diproses kembali setelah data tersedia.
+
+---
+
+# 7. Relasi Use Case
+
+Alur fungsional utama dapat diringkas sebagai berikut:
+
+**UC-01 Mengakses Ujian**
+↓
+**UC-02 Melihat Jadwal Ujian**
+↓
+**UC-03 Melihat Instruksi Ujian**
+↓
+**UC-04 Mengerjakan Ujian**
+↓
+**UC-05 Fisher-Yates Shuffle**
+↓
+**Soal Ditampilkan dalam Urutan Valid**
+↓
+**Jawaban Dikumpulkan**
+↓
+**Proses Evaluasi**
+↓
+**UC-06 Rekapitulasi Hasil**
+
+UC-05 merupakan bagian algoritmik utama dan menjadi **gate** sebelum Siswa dapat menggunakan urutan soal hasil pengacakan. Dengan demikian, hasil shuffle yang gagal validasi **tidak boleh diteruskan menjadi sesi ujian yang dapat dikerjakan**.
+
+# 8. Traceability
+
+| Use Case    | User Story                  | Fokus Requirement                       |
+| ----------- | --------------------------- | --------------------------------------- |
+| UC-01       | US-01                       | Akses ujian                             |
+| UC-02       | US-02                       | Jadwal ujian                            |
+| UC-03       | US-03                       | Instruksi ujian                         |
+| UC-04       | US-04                       | Pengerjaan ujian                        |
+| **UC-05 ★** | **US-05**                   | **Fisher-Yates Shuffle**                |
+| UC-06       | US-14 / kebutuhan rekap SRS | Rekapitulasi hasil                      |
+| UC-05 ★     | US-05                       | Validasi tidak ada duplikasi            |
+| UC-05 ★     | US-05                       | Penanganan data soal kosong/tidak valid |
+| UC-05 ★     | US-05                       | Penanganan timeout shuffle              |
+| UC-06       | —                           | NFR-03: rekap ≤ 1 menit                 |
+
+## Catatan Analisis
+
+1. **NFR-02 belum memiliki angka latensi konkret** pada SRS yang diberikan, sehingga Draft Use Case tidak menetapkan angka baru.
+2. Validasi hasil Fisher-Yates menggunakan prinsip **jumlah output sama dengan input dan seluruh ID soal unik**.
+3. **Timeout server, data soal kosong, data soal tidak valid, hasil shuffle duplikat, dan ketidaksesuaian jumlah soal** diperlakukan sebagai exception agar hasil yang tidak valid tidak masuk ke sesi ujian.
+4. **NFR-03** diterapkan pada UC-06 dengan target rekapitulasi tersedia maksimal 1 menit setelah hasil ujian tersedia.
+5. Detail seperti mekanisme retry, database transaction, session storage, endpoint Express.js, dan strategi recovery merupakan bagian **HLD/LLD**, bukan keputusan pada Use Case.
+
+# DRAFT USER FLOW
+
+## Sistem Informasi Ujian Online TKA — Fisher-Yates Shuffle
+
+### 1. Tujuan User Flow
+
+User Flow ini menggambarkan perjalanan **Siswa** mulai dari masuk ke ujian sampai memperoleh skor setelah menyelesaikan ujian. Fokus interaksi terdapat pada proses **pengacakan urutan soal menggunakan Fisher-Yates Shuffle**, termasuk kondisi berhasil, loading, dan jalur fallback ketika proses tidak dapat dilanjutkan.
+
+**Aktor utama:** Siswa
+**Proses utama:** Akses ujian → Validasi → Pengacakan Fisher-Yates → Pengerjaan → Submit → Penilaian → Skor
+
+---
+
+# 2. Langkah Alur Pengguna
+
+| No. | Tahap             | Aksi Pengguna                 | Respons Sistem                                           | Status            |
+| --: | ----------------- | ----------------------------- | -------------------------------------------------------- | ----------------- |
+|   1 | Masuk sistem      | Siswa masuk ke website        | Sistem menampilkan halaman ujian                         | Normal            |
+|   2 | Pilih ujian       | Siswa memilih ujian TKA       | Sistem memeriksa ketersediaan dan akses ujian            | Validasi Awal     |
+|   3 | Lihat instruksi   | Siswa membaca instruksi ujian | Sistem menampilkan ketentuan ujian                       | Normal            |
+|   4 | Mulai ujian       | Siswa menekan **Mulai Ujian** | Sistem memulai proses pembuatan sesi ujian               | Validasi Awal     |
+|   5 | Validasi data     | —                             | Sistem memeriksa ketersediaan dan validitas data soal    | Validasi Awal     |
+|   6 | Proses shuffle    | —                             | Sistem menjalankan proses pengacakan Fisher-Yates        | Indikator Loading |
+|   7 | Menunggu hasil    | Siswa menunggu proses selesai | Sistem menampilkan indikator proses                      | Indikator Loading |
+|   8 | Hasil valid       | —                             | Sistem memeriksa jumlah dan keunikan soal                | Penanganan Hasil  |
+|   9 | Hasil diterima    | —                             | Sistem menetapkan urutan soal untuk sesi ujian           | Penanganan Hasil  |
+|  10 | Mulai mengerjakan | Siswa menjawab soal           | Sistem menampilkan soal berdasarkan urutan hasil shuffle | Normal            |
+|  11 | Navigasi soal     | Siswa berpindah antarsoal     | Sistem mempertahankan urutan soal pada sesi tersebut     | Normal            |
+|  12 | Review            | Siswa memeriksa jawaban       | Sistem menampilkan status jawaban                        | Normal            |
+|  13 | Submit            | Siswa mengirim ujian          | Sistem menyimpan jawaban dan mengakhiri sesi             | Penanganan Hasil  |
+|  14 | Koreksi           | —                             | Sistem melakukan koreksi otomatis                        | Penanganan Hasil  |
+|  15 | Perhitungan skor  | —                             | Sistem menghitung skor evaluasi                          | Penanganan Hasil  |
+|  16 | Lihat skor        | Siswa melihat hasil           | Sistem menampilkan skor ujian                            | Selesai           |
+
+### Alur ringkas
+
+**Masuk → Pilih Ujian → Validasi → Instruksi → Mulai → Loading Fisher-Yates → Validasi Hasil → Soal Ditampilkan → Mengerjakan → Submit → Koreksi → Hitung Skor → Lihat Skor**
+
+---
+
+# 3. Empat Status Sistem
+
+## 3.1 Status 1 — Validasi Awal
+
+Status ini terjadi sebelum proses pengacakan dimulai.
+
+### Sistem melakukan validasi:
+
+* Akses Siswa terhadap ujian.
+* Status/periode ujian.
+* Ketersediaan bank soal.
+* Data soal yang digunakan.
+* Validitas kumpulan soal untuk proses pengacakan.
+
+### Kondisi berhasil
+
+Jika seluruh validasi terpenuhi:
+
+**Validasi berhasil → lanjut ke Fisher-Yates Shuffle.**
+
+### Kondisi gagal
+
+Jika terdapat data yang tidak memenuhi persyaratan:
+
+**Validasi gagal → jangan mulai sesi pengerjaan → tampilkan informasi yang sesuai.**
+
+Contoh:
+
+> "Ujian belum dapat dimulai karena soal ujian belum tersedia."
+
+---
+
+# 3.2 Status 2 — Indikator Loading
+
+Setelah validasi berhasil, sistem memasuki proses pengacakan.
+
+### Interaksi
+
+**Siswa:**
+
+* Menekan tombol **Mulai Ujian**.
+* Menunggu proses persiapan ujian.
+
+**Sistem:**
+
+* Menampilkan indikator loading.
+* Menandakan bahwa sistem sedang menyiapkan soal.
+* Mencegah Siswa memulai pengerjaan sebelum hasil shuffle tersedia.
+
+Contoh informasi:
+
+> **Menyiapkan ujian...**
+> Urutan soal sedang diacak.
+
+### Aturan UX
+
+Selama status loading:
+
+1. Soal belum ditampilkan sebagai soal aktif.
+2. Siswa tidak dapat mengerjakan soal.
+3. Sistem tidak boleh menampilkan hasil shuffle yang belum tervalidasi.
+4. Loading berakhir ketika hasil shuffle berhasil atau terjadi kegagalan.
+
+### NFR-02
+
+Durasi proses pengacakan mengikuti **NFR-02**.
+
+Nilai batas numerik NFR-02 pada SRS saat ini:
+
+**[BELUM DITETAPKAN]**
+
+Sehingga User Flow tidak menetapkan angka baru untuk batas loading.
+
+---
+
+# 3.3 Status 3 — Penanganan Hasil
+
+Setelah proses Fisher-Yates selesai, sistem memeriksa hasil pengacakan.
+
+### Validasi hasil
+
+Sistem memastikan:
+
+* Jumlah soal output sesuai dengan jumlah soal input.
+* Setiap soal memiliki identitas yang valid.
+* Tidak terdapat soal yang muncul lebih dari satu kali.
+* Seluruh soal yang ditentukan tersedia.
+
+### Jika valid
+
+Alurnya:
+
+**Shuffle selesai → Validasi berhasil → Simpan urutan sesi → Tampilkan soal pertama.**
+
+Siswa kemudian dapat mengerjakan ujian.
+
+### Jika tidak valid
+
+Alurnya:
+
+**Shuffle selesai → Validasi gagal → Jangan gunakan hasil → Masuk Fallback.**
+
+Hasil yang tidak valid tidak boleh digunakan untuk memulai pengerjaan.
+
+---
+
+# 3.4 Status 4 — Jalur Cadangan (Fallback)
+
+Fallback digunakan ketika proses utama tidak dapat dilanjutkan.
+
+### Fallback A — Data soal kosong
+
+**Kondisi:**
+Tidak terdapat soal yang dapat digunakan.
+
+**Alur:**
+
+`Validasi → Data soal kosong → Hentikan proses → Informasikan Siswa`
+
+Contoh:
+
+> "Ujian belum dapat dimulai karena soal belum tersedia. Silakan coba kembali nanti."
+
+---
+
+### Fallback B — Data soal tidak valid
+
+**Kondisi:**
+Data soal tidak memenuhi persyaratan.
+
+**Alur:**
+
+`Validasi → Data tidak valid → Hentikan proses → Informasikan kegagalan`
+
+Sistem tidak menampilkan soal yang belum tervalidasi.
+
+---
+
+### Fallback C — Timeout proses pengacakan
+
+**Kondisi:**
+Proses shuffle melewati batas waktu yang ditentukan NFR-02.
+
+**Alur:**
+
+`Loading → Timeout → Hentikan proses → Informasikan Siswa → Coba kembali`
+
+Contoh:
+
+> "Persiapan ujian membutuhkan waktu lebih lama dari biasanya. Silakan coba kembali."
+
+---
+
+### Fallback D — Hasil shuffle mengandung duplikasi
+
+**Kondisi:**
+Terdapat ID soal yang sama lebih dari satu kali.
+
+**Alur:**
+
+`Shuffle → Validasi gagal → Tolak hasil → Jangan mulai ujian`
+
+Sistem tidak boleh meneruskan hasil shuffle tersebut ke Siswa.
+
+---
+
+### Fallback E — Koneksi terputus
+
+**Kondisi:**
+Koneksi Siswa terputus saat proses persiapan atau pengerjaan.
+
+**Alur umum:**
+
+`Koneksi terputus → Informasikan kondisi → Pertahankan sesi yang telah berhasil disimpan → Coba sambungkan kembali`
+
+Detail mekanisme pemulihan sesi ditetapkan pada tahap desain teknis, bukan pada User Flow ini.
+
+---
+
+# 4. Alur Setelah Pengacakan
+
+Setelah urutan soal berhasil ditetapkan, **Fisher-Yates tidak dijalankan kembali setiap kali Siswa berpindah soal**.
+
+Contoh:
+
+```text
+Hasil Shuffle
+     ↓
+[Q7] → [Q2] → [Q10] → [Q4] → [Q1]
+     ↓
+Simpan sebagai urutan sesi
+     ↓
+Siswa mengerjakan
+     ↓
+Next / Previous
+     ↓
+Tetap menggunakan urutan sesi
+```
+
+Hal ini memastikan Siswa mengerjakan satu sesi dengan urutan soal yang konsisten.
+
+---
+
+# 5. Alur Sampai Melihat Skor
+
+Setelah Siswa menyelesaikan soal:
+
+1. Siswa meninjau jawaban.
+2. Siswa memilih **Submit/Kumpulkan**.
+3. Sistem meminta konfirmasi pengumpulan.
+4. Siswa mengonfirmasi pengumpulan.
+5. Sistem menyimpan jawaban.
+6. Sistem mengakhiri sesi ujian.
+7. Sistem melakukan koreksi otomatis.
+8. Sistem menghitung skor.
+9. Sistem menyediakan hasil evaluasi.
+10. Siswa membuka halaman hasil.
+11. Sistem menampilkan skor.
+
+### NFR-03 — Rekapitulasi
+
+Untuk proses rekapitulasi hasil, SRS menetapkan:
+
+**Rekapitulasi tersedia ≤ 1 menit setelah hasil ujian tersedia.**
+
+Batas tersebut berlaku pada proses ketersediaan rekap hasil, bukan sebagai batas waktu proses Fisher-Yates.
+
+---
+
+# 6. Diagram User Flow Mermaid
+
+```mermaid
+flowchart TD
+    A([Siswa Masuk Sistem]) --> B[Pilih Ujian]
+    B --> C{Validasi Awal}
+
+    C -->|Tidak valid| F1[Fallback: Ujian Tidak Dapat Diakses]
+    F1 --> R1([Coba Kembali])
+
+    C -->|Valid| D[Lihat Instruksi]
+    D --> E[Klik Mulai Ujian]
+    E --> V{Validasi Data Soal}
+
+    V -->|Soal kosong| F2[Fallback: Soal Tidak Tersedia]
+    F2 --> R1
+
+    V -->|Data tidak valid| F3[Fallback: Data Soal Tidak Valid]
+    F3 --> R1
+
+    V -->|Valid| L[Indikator Loading]
+    L --> S[Fisher-Yates Shuffle]
+
+    S --> T{Batas NFR-02 Terpenuhi?}
+
+    T -->|Tidak| F4[Fallback: Timeout Shuffle]
+    F4 --> R1
+
+    T -->|Ya| H{Validasi Hasil Shuffle}
+
+    H -->|Tidak valid / duplikasi| F5[Fallback: Hasil Shuffle Ditolak]
+    F5 --> R1
+
+    H -->|Valid| Q[Urutan Soal Ditetapkan]
+    Q --> U[Soal Pertama Ditampilkan]
+
+    U --> W[Siswa Mengerjakan Ujian]
+    W --> X{Semua Selesai / Submit?}
+
+    X -->|Belum| W
+    X -->|Ya| Y[Submit Jawaban]
+
+    Y --> Z[Simpan Jawaban]
+    Z --> AA[Koreksi Otomatis]
+    AA --> AB[Hitung Skor]
+    AB --> AC{Rekap Tersedia <= 1 Menit?}
+
+    AC -->|Ya| AD[Tampilkan Skor]
+    AC -->|Tidak| AE[Status Rekap Belum Tersedia]
+    AE --> AF[Proses Rekap Dilanjutkan]
+    AF --> AD
+
+    AD --> AG([Selesai])
+
+    W -. Koneksi Terputus .-> F6[Fallback: Pertahankan Sesi yang Berhasil Tersimpan]
+    F6 --> R2{Koneksi Kembali?}
+    R2 -->|Ya| W
+    R2 -->|Tidak| AH([Sesi Berakhir])
+```
+
+---
+
+# 7. Prinsip Interaksi Utama
+
+| Prinsip                         | Aturan User Flow                                                                                    |
+| ------------------------------- | --------------------------------------------------------------------------------------------------- |
+| **Visibility of system status** | Sistem memberikan indikator ketika Fisher-Yates sedang diproses.                                    |
+| **Error prevention**            | Hasil shuffle divalidasi sebelum soal diberikan kepada Siswa.                                       |
+| **Consistency**                 | Urutan hasil shuffle dipertahankan selama satu sesi.                                                |
+| **Feedback**                    | Sistem memberikan informasi ketika validasi, loading, berhasil, atau gagal.                         |
+| **Fail-safe**                   | Hasil shuffle yang kosong, duplikat, tidak valid, atau timeout tidak digunakan untuk memulai ujian. |
+| **Performance awareness**       | Proses shuffle mengikuti batas NFR-02 dan rekap mengikuti NFR-03.                                   |
+
+## Traceability
+
+| User Flow                    | Requirement                |
+| ---------------------------- | -------------------------- |
+| Akses ujian                  | UC-01 / US-01              |
+| Validasi awal                | UC-01                      |
+| Mulai ujian                  | UC-01                      |
+| Fisher-Yates Shuffle         | US-05 / UC-05              |
+| Validasi tidak ada duplikasi | UC-05                      |
+| Penanganan timeout           | NFR-02                     |
+| Pengerjaan soal              | US-04                      |
+| Submit jawaban               | SRS FR terkait pengumpulan |
+| Koreksi otomatis             | SRS FR terkait penilaian   |
+| Tampilkan skor               | SRS FR terkait skor        |
+| Rekapitulasi ≤ 1 menit       | NFR-03                     |
+
+
+# DRAFT ACCEPTANCE CRITERIA
+
+## Sistem Informasi Ujian Online TKA — Fisher-Yates Shuffle
+
+### Referensi
+
+| User Story  | Fitur                                            | NFR Terkait    |
+| ----------- | ------------------------------------------------ | -------------- |
+| **US-03 ★** | Pengacakan urutan soal menggunakan Fisher-Yates  | NFR-01, NFR-05 |
+| **US-04 ★** | Pengacakan opsi jawaban menggunakan Fisher-Yates | NFR-06         |
+| **US-05**   | Pengumpulan/Submit ujian dan penyediaan hasil    | NFR-03, NFR-13 |
+
+> **Catatan:** NFR-01, NFR-05, dan NFR-06 menggunakan target variasi **≥95%**. Target tersebut harus diuji pada sejumlah sesi yang memadai dengan kumpulan soal yang sama. NFR-03 menetapkan rekap hasil tersedia **≤1 menit**, sedangkan NFR-13 menetapkan skor tersedia pada **100% ujian yang berhasil diselesaikan**.
+
+---
+
+# 1. US-03 ★ — Pengacakan Urutan Soal
+
+**User Story:**
+
+> Sebagai **Siswa**, saya ingin mendapatkan urutan soal yang diacak menggunakan algoritma **Fisher-Yates Shuffle**, sehingga urutan soal pada sesi ujian tidak selalu sama.
+
+## AC-03.01 — Happy Path: Soal berhasil diacak
+
+**Scenario:** Sistem mengacak urutan soal menggunakan Fisher-Yates
+
+**Given**
+
+* Siswa memiliki akses ke ujian.
+* Ujian memiliki **50 soal**.
+* Setiap soal memiliki ID yang unik.
+* Seluruh data soal tersedia dan valid.
+
+**When**
+
+* Siswa memilih **Mulai Ujian**.
+
+**Then**
+
+* Sistem menjalankan proses pengacakan menggunakan algoritma Fisher-Yates.
+* Sistem menghasilkan **50 posisi soal**.
+* Setiap ID soal muncul tepat satu kali.
+* Tidak terdapat ID soal yang duplikat.
+* Siswa menerima urutan soal hasil pengacakan.
+* Urutan tersebut digunakan untuk sesi ujian yang sedang berlangsung.
+
+---
+
+## AC-03.02 — Happy Path: Urutan dipertahankan selama sesi
+
+**Scenario:** Sistem tidak mengacak ulang soal ketika Siswa berpindah halaman
+
+**Given**
+
+* Sesi ujian telah berhasil dibuat.
+* Urutan soal telah dihasilkan oleh Fisher-Yates.
+* Urutan sesi adalah `[Q12, Q4, Q27, Q8, ...]`.
+
+**When**
+
+* Siswa berpindah dari satu soal ke soal lainnya.
+* Siswa kembali ke soal sebelumnya.
+
+**Then**
+
+* Sistem menggunakan urutan sesi yang telah dibuat.
+* Soal tetap berada pada posisi yang sama.
+* Sistem tidak menjalankan pengacakan ulang.
+* Tidak ada soal baru yang muncul secara acak selama sesi yang sama.
+
+---
+
+## AC-03.03 — Edge Case: Data soal kosong
+
+**Scenario:** Sistem menolak memulai ujian ketika tidak terdapat soal
+
+**Given**
+
+* Siswa memiliki akses ke ujian.
+* Data soal untuk ujian kosong.
+
+**When**
+
+* Siswa memilih **Mulai Ujian**.
+
+**Then**
+
+* Sistem tidak menjalankan pengacakan sebagai sesi ujian.
+* Sistem tidak menampilkan soal.
+* Sistem tidak membuat sesi pengerjaan yang valid.
+* Sistem menampilkan informasi bahwa soal ujian tidak tersedia.
+
+---
+
+## AC-03.04 — Edge Case: Hasil shuffle mengandung duplikasi
+
+**Scenario:** Sistem menolak hasil pengacakan yang memiliki soal duplikat
+
+**Given**
+
+* Ujian memiliki 50 soal unik.
+* Fisher-Yates menghasilkan data hasil pengacakan.
+* Hasil tersebut memiliki ID soal yang muncul lebih dari satu kali.
+
+**When**
+
+* Sistem melakukan validasi hasil pengacakan.
+
+**Then**
+
+* Sistem menyatakan hasil pengacakan tidak valid.
+* Hasil tersebut tidak digunakan untuk sesi ujian.
+* Sistem tidak menampilkan urutan soal yang tidak valid kepada Siswa.
+* Sistem menangani kegagalan sesuai mekanisme error aplikasi.
+
+---
+
+## AC-03.05 — Edge Case: Jumlah hasil shuffle tidak sesuai
+
+**Scenario:** Sistem menolak hasil shuffle dengan jumlah soal yang berbeda
+
+**Given**
+
+* Data input berisi **50 soal**.
+* Hasil pengacakan hanya berisi **49 soal** atau lebih dari 50 soal.
+
+**When**
+
+* Sistem melakukan validasi hasil pengacakan.
+
+**Then**
+
+* Sistem menyatakan hasil pengacakan tidak valid.
+* Siswa tidak dapat memulai pengerjaan menggunakan hasil tersebut.
+* Sistem tidak meneruskan hasil tersebut ke halaman ujian.
+
+---
+
+## AC-03.06 — Performance: Variasi urutan soal ≥95%
+
+**Scenario:** Pengacakan menghasilkan variasi urutan pada sebagian besar sesi
+
+**Given**
+
+* Tersedia kumpulan soal yang sama untuk pengujian berulang.
+* Dilakukan pengujian pada sejumlah sesi ujian.
+* Setiap sesi menjalankan Fisher-Yates.
+
+**When**
+
+* Urutan soal dari seluruh sesi dibandingkan.
+
+**Then**
+
+* Minimal **95% sesi** menghasilkan urutan soal yang berbeda dibandingkan sesi pembanding sesuai definisi metrik pengujian.
+* Tidak ada sesi yang memiliki soal duplikat.
+* Tidak ada soal yang hilang dari hasil pengacakan.
+
+**Metrik:**
+
+`Persentase variasi = (jumlah sesi dengan urutan berbeda / total sesi pengujian) × 100%`
+
+**Target: ≥95%**
+
+---
+
+## AC-03.07 — Error Handling: Timeout proses shuffle
+
+**Scenario:** Sistem menangani proses pengacakan yang melebihi batas NFR
+
+**Given**
+
+* Siswa telah memulai ujian.
+* Fisher-Yates sedang diproses.
+* Waktu proses melebihi batas latensi yang ditetapkan pada NFR-02.
+
+**When**
+
+* Sistem mendeteksi proses shuffle mengalami timeout.
+
+**Then**
+
+* Sistem tidak menggunakan hasil shuffle yang belum dinyatakan valid.
+* Sistem tidak menampilkan soal yang belum tervalidasi.
+* Sistem menampilkan informasi bahwa persiapan ujian gagal atau membutuhkan percobaan kembali.
+* Siswa dapat mencoba memulai kembali sesuai mekanisme sistem.
+
+> **Catatan:** Nilai numerik batas latensi NFR-02 belum ditetapkan pada SRS, sehingga acceptance criterion ini tidak menetapkan angka baru.
+
+---
+
+# 2. US-04 ★ — Pengacakan Opsi Jawaban
+
+**User Story:**
+
+> Sebagai **Siswa**, saya ingin mendapatkan urutan opsi jawaban yang diacak menggunakan algoritma **Fisher-Yates Shuffle**, sehingga posisi pilihan jawaban tidak selalu sama.
+
+## AC-04.01 — Happy Path: Opsi jawaban berhasil diacak
+
+**Scenario:** Sistem mengacak opsi jawaban menggunakan Fisher-Yates
+
+**Given**
+
+* Siswa sedang mengerjakan soal pilihan ganda.
+* Soal memiliki **4 opsi jawaban**.
+* Setiap opsi memiliki identitas yang unik.
+* Data opsi jawaban valid.
+
+**When**
+
+* Sistem menampilkan soal kepada Siswa.
+
+**Then**
+
+* Sistem mengacak opsi menggunakan Fisher-Yates.
+* Keempat opsi tetap tersedia.
+* Setiap opsi muncul tepat satu kali.
+* Tidak ada opsi yang hilang.
+* Tidak ada opsi yang muncul lebih dari satu kali.
+* Siswa dapat memilih salah satu opsi.
+
+---
+
+## AC-04.02 — Happy Path: Jawaban benar tetap teridentifikasi
+
+**Scenario:** Pengacakan opsi tidak mengubah jawaban benar
+
+**Given**
+
+* Sebuah soal memiliki 4 opsi.
+* Satu opsi telah ditentukan sebagai jawaban benar.
+* Posisi awal jawaban benar diketahui.
+
+**When**
+
+* Sistem mengacak urutan opsi menggunakan Fisher-Yates.
+
+**Then**
+
+* Posisi opsi dapat berubah.
+* Identitas jawaban benar tetap terhubung dengan opsi yang benar.
+* Sistem tidak mengubah status benar/salah akibat perubahan posisi opsi.
+
+---
+
+## AC-04.03 — Happy Path: Variasi opsi ≥95%
+
+**Scenario:** Pengacakan menghasilkan variasi posisi opsi pada sesi pengujian
+
+**Given**
+
+* Kumpulan soal yang sama digunakan pada sejumlah sesi.
+* Setiap soal memiliki beberapa opsi jawaban yang valid.
+* Pengacakan opsi dijalankan pada setiap sesi.
+
+**When**
+
+* Posisi opsi jawaban dibandingkan antar sesi.
+
+**Then**
+
+* Minimal **95% sesi** menunjukkan variasi susunan opsi sesuai definisi metrik pengujian.
+* Seluruh opsi tetap tersedia pada setiap sesi valid.
+* Tidak terdapat opsi duplikat.
+
+**Target: ≥95%**
+
+---
+
+## AC-04.04 — Edge Case: Opsi jawaban kosong
+
+**Scenario:** Sistem menolak soal dengan opsi jawaban yang tidak tersedia
+
+**Given**
+
+* Siswa membuka soal pilihan ganda.
+* Soal tidak memiliki opsi jawaban yang valid.
+
+**When**
+
+* Sistem akan menyiapkan opsi jawaban untuk ditampilkan.
+
+**Then**
+
+* Sistem tidak menjalankan pengacakan terhadap data yang tidak valid.
+* Sistem tidak menampilkan opsi kosong sebagai pilihan valid.
+* Sistem memberikan informasi bahwa data soal tidak dapat digunakan.
+
+---
+
+## AC-04.05 — Edge Case: Opsi duplikat
+
+**Scenario:** Sistem menangani opsi jawaban yang memiliki identitas duplikat
+
+**Given**
+
+* Soal memiliki beberapa opsi.
+* Dua atau lebih opsi memiliki identitas yang sama atau data duplikat.
+
+**When**
+
+* Sistem melakukan validasi sebelum pengacakan.
+
+**Then**
+
+* Sistem mendeteksi data opsi tidak valid.
+* Sistem tidak menggunakan data tersebut sebagai hasil pengacakan yang valid.
+* Soal ditangani sebagai data bermasalah sesuai mekanisme sistem.
+
+---
+
+## AC-04.06 — Error Handling: Pengacakan opsi gagal
+
+**Scenario:** Fisher-Yates gagal menghasilkan susunan opsi yang valid
+
+**Given**
+
+* Sistem sedang menyiapkan opsi jawaban.
+* Proses pengacakan menghasilkan output yang tidak memenuhi validasi.
+
+**When**
+
+* Sistem melakukan validasi output.
+
+**Then**
+
+* Sistem menolak output tersebut.
+* Sistem tidak menggunakan opsi yang tidak valid.
+* Sistem memberikan feedback bahwa soal tidak dapat ditampilkan secara normal.
+* Sistem menangani kegagalan sesuai mekanisme error aplikasi.
+
+---
+
+# 3. US-05 — Pengumpulan Ujian
+
+**User Story:**
+
+> Sebagai **Siswa**, saya ingin dapat mengirimkan jawaban setelah menyelesaikan ujian, sehingga sesi ujian dapat diselesaikan dan diproses untuk penilaian.
+
+## AC-05.01 — Happy Path: Submit berhasil
+
+**Scenario:** Siswa berhasil mengumpulkan ujian
+
+**Given**
+
+* Siswa berada pada sesi ujian yang aktif.
+* Jawaban yang telah dipilih telah tercatat.
+* Sesi ujian masih valid.
+
+**When**
+
+* Siswa memilih **Kumpulkan/Submit Ujian**.
+* Siswa mengonfirmasi pengumpulan.
+
+**Then**
+
+* Sistem menerima permintaan pengumpulan.
+* Jawaban Siswa disimpan.
+* Sesi ujian ditandai sebagai selesai.
+* Sistem meneruskan hasil jawaban ke proses koreksi.
+* Siswa tidak dapat mengubah jawaban setelah sesi dinyatakan selesai.
+
+---
+
+## AC-05.02 — Happy Path: Submit dengan soal belum dijawab
+
+**Scenario:** Siswa mengumpulkan ujian meskipun masih terdapat soal yang belum dijawab
+
+**Given**
+
+* Siswa memiliki sesi ujian aktif.
+* Terdapat soal yang belum memiliki jawaban.
+
+**When**
+
+* Siswa memilih **Submit** dan mengonfirmasi pengumpulan.
+
+**Then**
+
+* Sistem memberikan informasi bahwa masih terdapat soal yang belum dijawab.
+* Sistem tetap mengikuti aturan pengumpulan yang ditetapkan untuk ujian.
+* Jika pengumpulan diizinkan, jawaban yang belum diisi tetap tercatat sebagai tidak dijawab.
+* Sistem melanjutkan proses penilaian setelah pengumpulan berhasil.
+
+---
+
+## AC-05.03 — Edge Case: Submit dilakukan dua kali
+
+**Scenario:** Sistem menangani pengiriman ujian yang telah selesai
+
+**Given**
+
+* Siswa telah berhasil mengumpulkan ujian.
+* Status sesi telah berubah menjadi selesai.
+
+**When**
+
+* Siswa mencoba melakukan submit kembali.
+
+**Then**
+
+* Sistem menolak pengumpulan kedua.
+* Sistem tidak membuat hasil ujian kedua.
+* Sistem mempertahankan hasil pengumpulan pertama.
+
+---
+
+## AC-05.04 — Error Handling: Koneksi terputus saat submit
+
+**Scenario:** Koneksi terputus ketika Siswa mengirimkan ujian
+
+**Given**
+
+* Siswa memiliki sesi ujian aktif.
+* Siswa telah memilih submit.
+* Koneksi terputus sebelum sistem memberikan konfirmasi keberhasilan.
+
+**When**
+
+* Permintaan submit tidak dapat diselesaikan.
+
+**Then**
+
+* Sistem tidak menampilkan status berhasil apabila keberhasilan belum dikonfirmasi.
+* Data yang telah berhasil diterima/simpan tetap dipertahankan.
+* Siswa memperoleh informasi bahwa pengumpulan belum dapat dikonfirmasi.
+* Sistem memungkinkan proses dilanjutkan sesuai status sesi yang tersimpan.
+
+---
+
+## AC-05.05 — Error Handling: Server timeout saat submit
+
+**Scenario:** Server tidak merespons permintaan submit
+
+**Given**
+
+* Siswa memiliki sesi ujian aktif.
+* Siswa mengirimkan jawaban.
+* Server tidak memberikan respons dalam batas waktu layanan.
+
+**When**
+
+* Permintaan mengalami timeout.
+
+**Then**
+
+* Sistem menampilkan informasi bahwa pengumpulan belum dapat dikonfirmasi.
+* Sistem tidak membuat status selesai tanpa konfirmasi keberhasilan.
+* Data yang telah berhasil tersimpan tidak dihapus.
+* Sistem dapat melakukan penanganan lanjutan sesuai mekanisme retry/session recovery.
+
+---
+
+# 4. Acceptance Criteria Hasil Evaluasi
+
+## AC-05.06 — Skor tersedia 100%
+
+**Scenario:** Ujian yang berhasil diselesaikan menghasilkan skor
+
+**Given**
+
+* Siswa berhasil mengumpulkan ujian.
+* Jawaban telah berhasil disimpan.
+* Proses koreksi otomatis telah selesai.
+
+**When**
+
+* Sistem menyelesaikan proses perhitungan nilai.
+
+**Then**
+
+* Sistem menghasilkan skor evaluasi.
+* Skor tersedia untuk Siswa.
+* Skor dapat ditampilkan pada halaman hasil.
+* Target ketersediaan skor adalah **100% dari ujian yang berhasil diselesaikan** sesuai NFR-13.
+
+---
+
+## AC-05.07 — Rekap tersedia maksimal 1 menit
+
+**Scenario:** Hasil ujian masuk ke rekapitulasi
+
+**Given**
+
+* Ujian telah berhasil diselesaikan.
+* Proses koreksi telah menghasilkan hasil evaluasi.
+* Data hasil telah tersedia untuk proses rekap.
+
+**When**
+
+* Sistem memproses hasil evaluasi untuk rekapitulasi.
+
+**Then**
+
+* Rekapitulasi hasil tersedia dalam waktu **≤ 1 menit** setelah hasil ujian tersedia.
+* Data hasil yang telah tersedia dapat diakses oleh pengguna yang memiliki hak akses.
+* Jika proses belum selesai dalam batas tersebut, sistem tidak boleh menyatakan rekap telah tersedia.
+
+---
+
+# 5. Ringkasan Traceability
+
+| Acceptance Criteria | User Story | Requirement              |
+| ------------------- | ---------- | ------------------------ |
+| AC-03.01            | US-03 ★    | Fisher-Yates             |
+| AC-03.02            | US-03 ★    | Konsistensi urutan sesi  |
+| AC-03.03            | US-03 ★    | Error: data kosong       |
+| AC-03.04            | US-03 ★    | Validasi duplikasi       |
+| AC-03.05            | US-03 ★    | Validasi jumlah soal     |
+| AC-03.06            | US-03 ★    | NFR-01, NFR-05 ≥95%      |
+| AC-03.07            | US-03 ★    | NFR-02                   |
+| AC-04.01            | US-04 ★    | Fisher-Yates opsi        |
+| AC-04.02            | US-04 ★    | Integritas jawaban benar |
+| AC-04.03            | US-04 ★    | NFR-06 ≥95%              |
+| AC-04.04            | US-04 ★    | Error: opsi kosong       |
+| AC-04.05            | US-04 ★    | Error: opsi duplikat     |
+| AC-04.06            | US-04 ★    | Error: shuffle gagal     |
+| AC-05.01            | US-05      | Pengumpulan ujian        |
+| AC-05.02            | US-05      | Pengumpulan jawaban      |
+| AC-05.03            | US-05      | Duplicate submission     |
+| AC-05.04            | US-05      | Connection error         |
+| AC-05.05            | US-05      | Server timeout           |
+| AC-05.06            | US-05      | NFR-13 = 100%            |
+| AC-05.07            | US-05      | NFR-03 ≤1 menit          |
+
+# 6. Kriteria Validasi Utama
+
+Untuk keperluan QA, tiga indikator utama yang harus dapat dibuktikan melalui pengujian adalah:
+
+**1. Integritas Fisher-Yates**
+
+`Jumlah soal input = jumlah soal output = jumlah ID unik`
+
+Target: **100% tidak ada duplikasi pada sesi valid.**
+
+**2. Variasi pengacakan**
+
+`Persentase variasi ≥ 95%`
+
+Target diterapkan pada:
+
+* Variasi urutan soal → **NFR-01/NFR-05**
+* Variasi opsi jawaban → **NFR-06**
+
+**3. Hasil ujian**
+
+* Rekap tersedia **≤ 1 menit** setelah hasil tersedia → **NFR-03**
+* Skor tersedia pada **100% ujian yang berhasil diselesaikan** → **NFR-13**
+
+
+# REQUIREMENTS TRACEABILITY MATRIX (RTM)
+
+## Sistem Informasi Ujian Online TKA Berbasis Web — Fisher-Yates Shuffle
+
+### Keterangan
+
+* **SRS** = Software Requirements Specification
+* **US** = User Story
+* **UC** = Use Case
+* **AC** = Acceptance Criteria
+* **★** = Fitur utama berbasis algoritma Fisher-Yates
+* **Belum diturunkan** = elemen tersebut belum dibuat pada tahap sebelumnya dan tidak diada-adakan dalam RTM
+
+---
+
+## 1. RTM Utama
+
+| ID Kebutuhan (SRS)                                           | ID User Story | ID Use Case                                        | ID Acceptance Criteria                                                   | Komponen Teknis                                             | Rencana Uji                                                                                                |
+| ------------------------------------------------------------ | ------------- | -------------------------------------------------- | ------------------------------------------------------------------------ | ----------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------- |
+| **FR-01** Akses ujian                                        | US-01         | UC-01 Mengakses Ujian                              | Belum diturunkan                                                         | Frontend Next.js; Backend Express.js; Database MySQL        | Uji akses ujian oleh Siswa; uji ujian tersedia/tidak tersedia                                              |
+| **FR-02** Menampilkan jadwal ujian                           | US-02         | UC-02 Melihat Jadwal Ujian                         | Belum diturunkan                                                         | Frontend Next.js; Backend Express.js; MySQL                 | Uji pengambilan dan tampilan jadwal; uji tidak ada jadwal                                                  |
+| **FR-03** Menampilkan instruksi                              | US-03*        | UC-03 Melihat Instruksi Ujian                      | Belum diturunkan                                                         | Frontend Next.js; Backend Express.js; MySQL                 | Uji instruksi tampil sebelum ujian; uji data instruksi gagal                                               |
+| **FR-04** Menampilkan soal pilihan ganda                     | US-04*        | UC-04 Mengerjakan Ujian                            | Belum diturunkan                                                         | Frontend Next.js; Backend Express.js; MySQL                 | Uji soal dan opsi tampil; uji data soal tidak valid                                                        |
+| **FR-05 ★** Pengacakan urutan soal menggunakan Fisher-Yates  | **US-03 ★**   | **UC-05 Mengacak Urutan Soal dengan Fisher-Yates** | **AC-03.01, AC-03.02, AC-03.03, AC-03.04, AC-03.05, AC-03.06, AC-03.07** | **Express.js; Fisher-Yates Shuffle Engine; MySQL**          | **Functional test; duplicate detection; jumlah output; variasi ≥95%; timeout; data kosong**                |
+| **FR-06 ★** Pengacakan opsi jawaban menggunakan Fisher-Yates | **US-04 ★**   | **UC-05 / proses pengacakan opsi**                 | **AC-04.01, AC-04.02, AC-04.03, AC-04.04, AC-04.05, AC-04.06**           | **Express.js; Fisher-Yates Shuffle Engine; Next.js; MySQL** | **Uji pengacakan opsi; integritas jawaban benar; variasi ≥95%; opsi kosong/duplikat; shuffle gagal**       |
+| **FR-07** Menerima jawaban Siswa                             | US-04*        | UC-04 Mengerjakan Ujian                            | Belum diturunkan                                                         | Frontend Next.js; Backend Express.js; MySQL                 | Uji penyimpanan jawaban; uji perubahan jawaban                                                             |
+| **FR-08** Menerima pengumpulan ujian                         | **US-05**     | UC-04 Mengerjakan Ujian                            | **AC-05.01, AC-05.02, AC-05.03, AC-05.04, AC-05.05**                     | **Next.js; Express.js; MySQL**                              | **Uji submit berhasil; submit dengan soal kosong; duplicate submission; koneksi terputus; timeout server** |
+| **FR-09** Koreksi otomatis                                   | US-05         | UC-06 / proses evaluasi                            | AC-05.06                                                                 | Backend Express.js; MySQL                                   | Uji koreksi jawaban benar/salah; uji seluruh jawaban                                                       |
+| **FR-10** Menghitung skor                                    | US-05         | UC-06 / proses evaluasi                            | AC-05.06                                                                 | Backend Express.js; MySQL                                   | Uji perhitungan skor berdasarkan hasil koreksi                                                             |
+| **FR-11** Menampilkan skor                                   | US-05         | UC-06 / hasil ujian                                | **AC-05.06**                                                             | Frontend Next.js; Backend Express.js; MySQL                 | **Uji ketersediaan skor pada 100% ujian berhasil**                                                         |
+| **FR-12** Manajemen bank soal                                | US-12         | —                                                  | Belum diturunkan                                                         | Frontend Next.js; Backend Express.js; MySQL                 | Uji tambah, lihat, ubah, dan hapus data soal                                                               |
+| **FR-13** Manajemen jadwal                                   | US-13         | —                                                  | Belum diturunkan                                                         | Frontend Next.js; Backend Express.js; MySQL                 | Uji pembuatan, perubahan, dan penghapusan jadwal                                                           |
+| **FR-14** Rekap hasil evaluasi                               | US-14         | **UC-06 Rekapitulasi Hasil Ujian**                 | **AC-05.07**                                                             | Frontend Next.js; Backend Express.js; MySQL                 | **Uji ketersediaan rekap ≤1 menit setelah hasil tersedia**                                                 |
+| **FR-15** Hasil evaluasi untuk Pemilik Bimbel                | US-15         | UC-06 Rekapitulasi Hasil Ujian                     | Belum diturunkan                                                         | Frontend Next.js; Backend Express.js; MySQL                 | Uji akses rekap berdasarkan hak akses Pemilik Bimbel                                                       |
+| **FR-16** Detail hasil ujian                                 | US-16         | UC-06 / hasil ujian                                | Belum diturunkan                                                         | Frontend Next.js; Backend Express.js; MySQL                 | Uji detail hasil dan kesesuaian dengan jawaban                                                             |
+| **FR-17** Status ujian                                       | US-17         | UC-04 Mengerjakan Ujian                            | Belum diturunkan                                                         | Frontend Next.js; Backend Express.js; MySQL                 | Uji status ujian sebelum, sedang, dan setelah ujian                                                        |
+| **FR-18** Filter rekap                                       | US-18         | UC-06 Rekapitulasi Hasil Ujian                     | Belum diturunkan                                                         | Frontend Next.js; Backend Express.js; MySQL                 | Uji filter berdasarkan parameter yang tersedia                                                             |
+| **FR-19** Riwayat ujian                                      | US-19         | UC-06 / riwayat hasil                              | Belum diturunkan                                                         | Frontend Next.js; Backend Express.js; MySQL                 | Uji riwayat ujian Siswa dan kesesuaian data                                                                |
+| **FR-20** Statistik sederhana                                | US-20         | UC-06 Rekapitulasi Hasil Ujian                     | Belum diturunkan                                                         | Frontend Next.js; Backend Express.js; MySQL                 | Uji perhitungan dan kesesuaian statistik dengan data hasil                                                 |
+
+> **Catatan ID:** Pada tahap terbaru, US-03 dan US-04 digunakan sebagai story pengacakan ★, sedangkan US-05 digunakan untuk pengumpulan ujian. Karena terdapat perbedaan penomoran dengan draft tahap sebelumnya, RTM ini mengikuti **ID pada Tahap P3 yang terakhir diberikan**, bukan melakukan renumbering secara diam-diam.
+
+---
+
+# 2. RTM Non-Functional Requirements
+
+| ID Kebutuhan (SRS)                                        | ID User Story | ID Use Case | ID Acceptance Criteria | Komponen Teknis                         | Rencana Uji                                                                                                   |
+| --------------------------------------------------------- | ------------- | ----------- | ---------------------- | --------------------------------------- | ------------------------------------------------------------------------------------------------------------- |
+| **NFR-01** Variasi urutan soal ≥95%                       | US-03 ★       | UC-05       | **AC-03.06**           | Express.js; Fisher-Yates Shuffle Engine | Jalankan pengujian pada sejumlah sesi dengan bank soal sama; hitung persentase variasi                        |
+| **NFR-02** Latensi pengacakan                             | US-03 ★       | UC-05       | **AC-03.07**           | Express.js; Fisher-Yates Shuffle Engine | Performance test; ukur waktu mulai proses shuffle sampai hasil tersedia; nilai batas numerik mengikuti NFR-02 |
+| **NFR-03** Rekap tersedia ≤1 menit                        | US-05         | UC-06       | **AC-05.07**           | Express.js; MySQL; Next.js              | Performance test; ukur waktu hasil evaluasi tersedia sampai rekap dapat diakses                               |
+| **NFR-04** Penyelesaian ujian tanpa kegagalan sistem ≥95% | US-05         | UC-04       | Belum diturunkan       | Next.js; Express.js; MySQL              | End-to-end test pada sejumlah sesi ujian                                                                      |
+| **NFR-05** Variasi urutan soal                            | US-03 ★       | UC-05       | **AC-03.06**           | Fisher-Yates Shuffle Engine             | Statistical/functional test terhadap hasil shuffle                                                            |
+| **NFR-06** Variasi opsi jawaban ≥95%                      | US-04 ★       | UC-05       | **AC-04.03**           | Express.js; Fisher-Yates Shuffle Engine | Uji berulang pada kumpulan soal yang sama; hitung variasi susunan opsi                                        |
+| **NFR-07** Akses hasil berdasarkan hak akses              | US-15 / US-05 | UC-06       | Belum diturunkan       | Express.js; MySQL; Next.js              | Authorization test menggunakan role berbeda                                                                   |
+| **NFR-08** Fungsi manajemen tidak tersedia bagi Siswa     | US-12         | —           | Belum diturunkan       | Next.js; Express.js                     | Role-based access test                                                                                        |
+| **NFR-09** Perlindungan data evaluasi                     | US-15         | UC-06       | Belum diturunkan       | Express.js; MySQL                       | Authorization dan access-control test                                                                         |
+| **NFR-10** Data Siswa ditampilkan sesuai kebutuhan        | US-15         | UC-06       | Belum diturunkan       | Next.js; Express.js; MySQL              | Data exposure/privacy test                                                                                    |
+| **NFR-11** Alur ujian dapat diselesaikan                  | US-05         | UC-04       | Belum diturunkan       | Next.js; Express.js; MySQL              | End-to-end usability/functional test                                                                          |
+| **NFR-12** Responsivitas/smoothness                       | US-05         | UC-04       | Belum diturunkan       | Next.js; Express.js                     | Performance dan usability test                                                                                |
+| **NFR-13** Skor tersedia 100%                             | US-05         | UC-06       | **AC-05.06**           | Express.js; MySQL; Next.js              | Uji seluruh sesi ujian yang berhasil diselesaikan; verifikasi skor tersedia                                   |
+
+---
+
+# 3. Traceability Khusus Fitur Fisher-Yates ★
+
+Karena Fisher-Yates merupakan algoritma utama penelitian, keterlacakan fitur ini perlu dibuat lebih eksplisit.
+
+| Requirement | User Story | Use Case | Acceptance Criteria | Validasi QA                           |
+| ----------- | ---------- | -------- | ------------------- | ------------------------------------- |
+| FR-05 ★     | US-03 ★    | UC-05    | AC-03.01            | Fisher-Yates menghasilkan urutan soal |
+| FR-05 ★     | US-03 ★    | UC-05    | AC-03.02            | Urutan tidak berubah selama sesi      |
+| FR-05 ★     | US-03 ★    | UC-05    | AC-03.03            | Data soal kosong ditolak              |
+| FR-05 ★     | US-03 ★    | UC-05    | AC-03.04            | Duplikasi soal ditolak                |
+| FR-05 ★     | US-03 ★    | UC-05    | AC-03.05            | Jumlah output harus sesuai input      |
+| FR-05 ★     | US-03 ★    | UC-05    | AC-03.06            | Variasi urutan ≥95%                   |
+| FR-05 ★     | US-03 ★    | UC-05    | AC-03.07            | Timeout shuffle ditangani             |
+| FR-06 ★     | US-04 ★    | UC-05    | AC-04.01            | Opsi berhasil diacak                  |
+| FR-06 ★     | US-04 ★    | UC-05    | AC-04.02            | Jawaban benar tetap teridentifikasi   |
+| FR-06 ★     | US-04 ★    | UC-05    | AC-04.03            | Variasi opsi ≥95%                     |
+| FR-06 ★     | US-04 ★    | UC-05    | AC-04.04            | Opsi kosong ditolak                   |
+| FR-06 ★     | US-04 ★    | UC-05    | AC-04.05            | Opsi duplikat ditangani               |
+| FR-06 ★     | US-04 ★    | UC-05    | AC-04.06            | Shuffle gagal ditangani               |
+
+### Alur keterlacakan
+
+```text
+SRS
+ │
+ ├── FR-05 ★ ──► US-03 ★ ──► UC-05 ──► AC-03.01 ... AC-03.07
+ │                                      │
+ │                                      └── Rencana Uji Fisher-Yates
+ │
+ └── FR-06 ★ ──► US-04 ★ ──► UC-05 ──► AC-04.01 ... AC-04.06
+                                        │
+                                        └── Rencana Uji Pengacakan Opsi
+```
+
+---
+
+# 4. Traceability Pengumpulan sampai Skor
+
+```text
+FR-08
+  │
+  ▼
+US-05
+  │
+  ▼
+UC-04
+  │
+  ├── AC-05.01 ──► Submit berhasil
+  ├── AC-05.02 ──► Submit dengan soal belum dijawab
+  ├── AC-05.03 ──► Duplicate submission
+  ├── AC-05.04 ──► Koneksi terputus
+  └── AC-05.05 ──► Server timeout
+  │
+  ▼
+FR-09 ──► Koreksi otomatis
+  │
+  ▼
+FR-10 ──► Perhitungan skor
+  │
+  ▼
+FR-11 ──► AC-05.06 ──► Skor tersedia 100%
+  │
+  ▼
+FR-14 ──► AC-05.07 ──► Rekap tersedia ≤ 1 menit
+```
+
+---
+
+# 5. Rencana Pengujian Tingkat Tinggi
+
+| Kode Uji      | Fokus Pengujian              | Requirement   | Kriteria Kelulusan                                       |
+| ------------- | ---------------------------- | ------------- | -------------------------------------------------------- |
+| **TC-FY-01**  | Pengacakan soal              | FR-05         | Semua soal tersedia dan tidak ada duplikasi              |
+| **TC-FY-02**  | Konsistensi sesi             | FR-05         | Urutan tidak berubah selama satu sesi                    |
+| **TC-FY-03**  | Data soal kosong             | FR-05         | Sistem menolak sesi dan memberikan informasi             |
+| **TC-FY-04**  | Data soal duplikat           | FR-05         | Hasil tidak valid tidak digunakan                        |
+| **TC-FY-05**  | Jumlah soal                  | FR-05         | Jumlah output = jumlah input                             |
+| **TC-FY-06**  | Variasi Fisher-Yates         | NFR-01/NFR-05 | Variasi memenuhi target ≥95%                             |
+| **TC-FY-07**  | Latensi shuffle              | NFR-02        | Memenuhi batas latensi yang ditetapkan                   |
+| **TC-FY-08**  | Pengacakan opsi              | FR-06         | Semua opsi tersedia dan tidak duplikat                   |
+| **TC-FY-09**  | Integritas jawaban benar     | FR-06         | Opsi benar tetap teridentifikasi                         |
+| **TC-FY-10**  | Variasi opsi                 | NFR-06        | Variasi memenuhi target ≥95%                             |
+| **TC-SUB-01** | Submit normal                | FR-08         | Jawaban tersimpan dan sesi selesai                       |
+| **TC-SUB-02** | Submit dengan jawaban kosong | FR-08         | Sistem menangani jawaban yang belum diisi sesuai aturan  |
+| **TC-SUB-03** | Submit dua kali              | FR-08         | Submit kedua ditolak                                     |
+| **TC-SUB-04** | Koneksi terputus             | FR-08         | Data yang berhasil tersimpan tetap dipertahankan         |
+| **TC-SUB-05** | Server timeout               | FR-08         | Status submit tidak dinyatakan berhasil tanpa konfirmasi |
+| **TC-SCR-01** | Koreksi otomatis             | FR-09         | Jawaban dikoreksi sesuai kunci                           |
+| **TC-SCR-02** | Perhitungan skor             | FR-10         | Skor sesuai hasil koreksi                                |
+| **TC-SCR-03** | Ketersediaan skor            | NFR-13        | 100% ujian berhasil menghasilkan skor                    |
+| **TC-REC-01** | Ketersediaan rekap           | NFR-03        | Rekap tersedia ≤1 menit                                  |
+
+---
+
+# 6. Coverage Summary
+
+| Area                | Jumlah Requirement | Sudah Memiliki AC | Status                                         |
+| ------------------- | -----------------: | ----------------: | ---------------------------------------------- |
+| FR-01–FR-04         |                  4 |                 0 | Perlu diturunkan                               |
+| **FR-05 ★**         |              **1** |          **7 AC** | **Tercakup**                                   |
+| **FR-06 ★**         |              **1** |          **6 AC** | **Tercakup**                                   |
+| FR-07               |                  1 |                 0 | Perlu diturunkan                               |
+| **FR-08**           |              **1** |          **5 AC** | **Tercakup**                                   |
+| FR-09–FR-11         |                  3 |        1 AC utama | Sebagian tercakup                              |
+| FR-12–FR-13         |                  2 |                 0 | Perlu diturunkan                               |
+| FR-14               |                  1 |              1 AC | Tercakup                                       |
+| FR-15–FR-20         |                  6 |                 0 | Perlu diturunkan                               |
+| **NFR-01/NFR-05 ★** |              **2** |      **AC-03.06** | **Tercakup**                                   |
+| **NFR-02 ★**        |              **1** |      **AC-03.07** | **Tercakup, nilai threshold belum ditetapkan** |
+| **NFR-03**          |              **1** |      **AC-05.07** | **Tercakup**                                   |
+| **NFR-06 ★**        |              **1** |      **AC-04.03** | **Tercakup**                                   |
+| **NFR-13**          |              **1** |      **AC-05.06** | **Tercakup**                                   |
+
+---
+
+## 7. Kesimpulan RTM
+
+RTM menunjukkan bahwa **rantai keterlacakan inti penelitian sudah terbentuk**:
+
+> **SRS → User Story → Use Case → Acceptance Criteria → Rencana Uji**
+
+Fokus algoritma memiliki coverage paling lengkap:
+
+**FR-05 ★ → US-03 ★ → UC-05 → AC-03.01–AC-03.07 → TC-FY-01–TC-FY-07**
+
+dan:
+
+**FR-06 ★ → US-04 ★ → UC-05 → AC-04.01–AC-04.06 → TC-FY-08–TC-FY-10**
+
+Sementara alur pengumpulan dan hasil:
+
+**FR-08 → US-05 → UC-04 → AC-05.01–AC-05.05 → TC-SUB-01–TC-SUB-05**
+
+kemudian dilanjutkan ke:
+
+**FR-09 → FR-10 → FR-11 → NFR-13 → AC-05.06**
+
+serta:
+
+**FR-14 → NFR-03 → AC-05.07 → TC-REC-01**
+
+Dengan demikian, **fitur inti Fisher-Yates, penanganan error, pengumpulan ujian, skor, dan batas rekap telah memiliki keterlacakan sampai level rencana pengujian**. Requirement lain yang masih bertanda *Belum diturunkan* sebaiknya dibuatkan Use Case dan Acceptance Criteria pada tahap QA berikutnya agar coverage RTM mencapai 100%.
