@@ -1,0 +1,67 @@
+[Peran]
+Kamu adalah agile product owner dan business analyst.
+
+[Tugas]
+Ubah daftar Functional Requirements (FR) pada SRS terlampir menjadi DRAF User Stories untuk fitur prioritas Must dan Should (termasuk fitur AI/Algoritma ★).
+
+[Konteks]
+SRS PTM-02: FR-01 s.d FR-20 dari srs.md (TKA Online Fisher-Yates Shuffle)
+Persona Pengguna: Siswa Bimbel, Tentor/Admin, Pemilik Bimbel
+Fitur Algoritma Utama ★: Pengacakan urutan soal dan opsi jawaban (Fisher-Yates)
+Platform: Website (Next.js, Express.js)
+
+[Format output]
+1) Tabel User Story (ID, Narasi, FR Asal, Prioritas MoSCoW, Kategori)
+2) Evaluasi singkat prinsip INVEST per story
+3) Memecah story jika ada yang berukuran Epic
+
+[Peran]
+Kamu adalah system analyst aplikasi cerdas.
+
+[Tugas]
+Buat DRAFT Use Case formal untuk User Story prioritas, fokuskan pada fitur berbasis Algoritma Fisher-Yates dan alur penanganan kegagalannya.
+
+[Konteks]
+User Story Tahap 1: US-01 s.d US-05
+Rincian Layanan Algoritma: Fisher-Yates Shuffle Engine pada backend Express.js
+Batas Waktu Respon: NFR-02 (Latensi pengacakan) & NFR-03 (Rekap <= 1 menit)
+
+[Format output]
+ID & Nama Use Case, Aktor Utama & Pendukung, Precondition & Postcondition, Alur Utama, Alur Alternatif, dan Alur Eksepsi Khusus (Timeout server, data soal kosong, dll).
+
+[Peran]
+Kamu adalah UX designer dan interaction analyst produk cerdas.
+
+[Tugas]
+Susun DRAFT User Flow terstruktur untuk fitur pengacakan Fisher-Yates.
+
+[Konteks]
+Use Case Tahap 2: UC-01
+NFR Respon Waktu: Latensi pengacakan dan batas rekap
+
+[Format output]
+1) Langkah alur pengguna dari masuk ujian hingga lihat skor
+2) 4 Status Sistem: Validasi Awal, Indikator Loading, Penanganan Hasil, Jalur Cadangan (Fallback)
+3) Diagram alur Mermaid (`flowchart TD`)
+
+[Peran]
+Kamu adalah QA engineer dan test analyst.
+
+[Tugas]
+Tulis DRAFT Acceptance Criteria berpola Given-When-Then untuk User Story pengacakan (US-03 ★, US-04 ★) dan pengumpulan ujian (US-05).
+
+[Konteks]
+Daftar User Story: US-03, US-04, US-05
+Metrik SRS: Variasi urutan >= 95% (NFR-01, NFR-05, NFR-06), Rekap hasil <= 1 menit (NFR-03), Ketersediaan skor 100% (NFR-13).
+
+[Format output]
+Skenario Gherkin (Scenario, Given, When, Then) memuat Happy Path dan Edge Case / Error handling.
+
+[Peran]
+Kamu adalah requirement engineer.
+
+[Tugas]
+Rangkum seluruh keterlacakan elemen P2 dan P3 ke dalam tabel Requirements Traceability Matrix (RTM).
+
+[Format output]
+Tabel RTM dengan kolom: ID Kebutuhan (SRS) | ID User Story | ID Use Case | ID Acceptance Criteria | Komponen Teknis | Rencana Uji
