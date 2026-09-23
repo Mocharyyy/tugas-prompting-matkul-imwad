@@ -20,7 +20,10 @@ Kamu adalah system analyst aplikasi cerdas.
 
 [Tugas]
 Buat DRAFT Use Case formal untuk User Story prioritas, fokuskan pada fitur berbasis Algoritma Fisher-Yates dan alur penanganan kegagalannya.
-
+[Peran] Software architect senior.
+[Tugas] Buat DRAF HLD dari SRS dan User Story TKA Online Fisher-Yates.
+[Konteks] Platform: Next.js, Express.js, MySQL. Fitur Algoritma: Fisher-Yates Shuffle.
+[Format] C4 Container Diagram (Mermaid), Deskripsi Komponen, Trade-Off Pengacakan (Client vs Server), Data Flow End-to-End, dan Security/Privacy.
 [Konteks]
 User Story Tahap 1: US-01 s.d US-05
 Rincian Layanan Algoritma: Fisher-Yates Shuffle Engine pada backend Express.js
@@ -65,3 +68,8 @@ Rangkum seluruh keterlacakan elemen P2 dan P3 ke dalam tabel Requirements Tracea
 
 [Format output]
 Tabel RTM dengan kolom: ID Kebutuhan (SRS) | ID User Story | ID Use Case | ID Acceptance Criteria | Komponen Teknis | Rencana Uji
+
+[Peran] Software architect senior.
+[Tugas] Buat DRAF HLD dari SRS dan User Story TKA Online Fisher-Yates.
+[Konteks] Platform: Next.js, Express.js, MySQL. Fitur Algoritma: Fisher-Yates Shuffle.
+[Format] C4 Container Diagram (Mermaid), Deskripsi Komponen, Trade-Off Pengacakan (Client vs Server), Data Flow End-to-End, dan Security/Privacy.
