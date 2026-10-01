@@ -1,1 +1,85 @@
+openapi: 3.0.3
+info:
+  title: API Ujian Online TKA - Fisher-Yates Shuffle
+  description: Spesifikasi REST API Ujian Online TKA berbasis Algoritma Fisher-Yates Shuffle.
+  version: 1.0.0
+servers:
+  - url: http://localhost:3000/api/v1
+    description: Server Lokal Development
+paths:
+  /auth/login:
+    post:
+      summary: Autentikasi Pengguna
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [username, password]
+              properties:
+                username:
+                  type: string
+                password:
+                  type: string
+      responses:
+        '200':
+          description: Login Berhasil
+        '401':
+          description: Kredensial Salah
+        '500':
+          description: Server Error
 
+  /exams/{id}/start:
+    post:
+      tags:
+        - AI
+        - Algoritma
+      summary: Memulai Sesi Ujian dengan Pengacakan Fisher-Yates Shuffle
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Sesi Ujian Berhasil Disiapkan
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ExamSessionResponse'
+        '400':
+          description: Jadwal Ujian Tidak Aktif
+        '500':
+          description: Shuffle Fallback Mode Dipicu
+
+components:
+  schemas:
+    ExamSessionResponse:
+      type: object
+      properties:
+        session_id:
+          type: string
+        exam_title:
+          type: string
+        questions:
+          type: array
+          items:
+            $ref: '#/components/schemas/QuestionItem'
+    QuestionItem:
+      type: object
+      properties:
+        question_id:
+          type: string
+        question_text:
+          type: string
+        options:
+          type: array
+          items:
+            type: object
+            properties:
+              option_id:
+                type: string
+              option_text:
+                type: string
