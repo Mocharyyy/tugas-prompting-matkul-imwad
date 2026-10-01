@@ -1,1 +1,47 @@
+3. File `prisma/schema.prisma`**
+```prisma
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
 
+generator client {
+  provider = "prisma-client-js"
+}
+
+enum Role {
+  SISWA
+  TENTOR
+  PEMILIK
+}
+
+model User {
+  id           String       @id @default(uuid())
+  name         String
+  username     String       @unique
+  passwordHash String
+  role         Role
+  results      ExamResult[]
+}
+
+model QuestionBank {
+  id           String           @id @default(uuid())
+  questionText String           @db.Text
+  options      QuestionOption[]
+}
+
+model QuestionOption {
+  id         String       @id @default(uuid())
+  questionId String
+  question   QuestionBank @relation(fields: [questionId], references: [id], onDelete: Cascade)
+  optionText String       @db.Text
+  isCorrect  Boolean      @default(false)
+}
+
+model ExamResult {
+  id          String   @id @default(uuid())
+  userId      String
+  user        User     @relation(fields: [userId], references: [id])
+  totalScore  Decimal  @db.Decimal(5, 2)
+  submittedAt DateTime @default(now())
+}
